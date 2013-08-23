@@ -20,11 +20,11 @@ module.exports = function(grunt) {
      */
     var filesMap = [
         {
-            name : 'module',
+            name : 'config',
             concat : true
         },
         {
-            name : 'module2',
+            name : 'base',
             concat : true
         }];
     /**
@@ -53,6 +53,7 @@ module.exports = function(grunt) {
                  ' * '+ name +'.js v'+ version +'\n',
                  ' *\n',
                  ' * '+ description +'\n',
+                 ' *\n',
                  ' * '+page + '\n',
                  ' * ================================================================\n',
                  ' * Copyright 2013 '+ author +'\n',
