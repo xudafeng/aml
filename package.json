@@ -13,20 +13,7 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.2",
-    "grunt-kmc": "~0.1.1",
     "grunt-mocha": "~0.3.0",
     "grunt-contrib-cssmin": "~0.6.0"
-  },
-  "main": "Gruntfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/xudafeng/aml.git"
-  },
-  "license": "BSD",
-  "bugs": {
-    "url": "https://github.com/xudafeng/aml/issues"
   }
 }
