@@ -1,18 +1,32 @@
 {
-    "name": "aml",
-    "version": "1.0.0",
-    "description": "A simple asynchronous module loader with dependency management.",
-    "homepage": "http://xudafeng.github.com/aml/",
-    "author": "xudafeng@126.com",
-    "licenses":[{
-        "type": "MIT",
-        "url": "https://raw.github.com/xudafeng/aml/master/LICENSE"
-    }],
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-uglify": "~0.2.2",
-        "grunt-kmc": "~0.1.1",
-        "grunt-mocha": "~0.3.0",
-        "grunt-contrib-cssmin": "~0.6.0"
+  "name": "aml",
+  "version": "1.0.0",
+  "description": "A simple asynchronous module loader with dependency management.",
+  "homepage": "http://xudafeng.github.com/aml/",
+  "author": "xudafeng@126.com",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/xudafeng/aml/master/LICENSE"
     }
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-kmc": "~0.1.1",
+    "grunt-mocha": "~0.3.0",
+    "grunt-contrib-cssmin": "~0.6.0"
+  },
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xudafeng/aml.git"
+  },
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/xudafeng/aml/issues"
+  }
 }
