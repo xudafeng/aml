@@ -20,13 +20,23 @@ module.exports = function(grunt) {
      */
     var filesMap = [
         {
+            name : 'intro',
+            concat : true
+        },{
             name : 'config',
             concat : true
         },
         {
             name : 'base',
             concat : true
-        }];
+        },{
+            name : 'loader',
+            concat : true
+        },{
+            name : 'outro',
+            concat : true
+        }
+    ];
     /**
      * 创建文件任务队列
      * @param task
@@ -54,15 +64,15 @@ module.exports = function(grunt) {
                  ' *\n',
                  ' * '+ description +'\n',
                  ' *\n',
-                 ' * '+page + '\n',
+                 ' * ' + page + '\n',
                  ' * ================================================================\n',
                  ' * Copyright 2013 '+ author +'\n',
-                 ' * \n',
+                 ' *\n',
                  ' * Licensed under the <%= '+ packageName +'.licenses[0].type %> License\n',
                  ' * you may not use this file except in compliance with the License.\n',
                  ' *\n',
                  ' * <%= '+ packageName +'.licenses[0].url %>\n',
-                 ' * ================================================================ */\n'].join(''),
+                 ' * ================================================================ */\n\n\n'].join(''),
         concat: {
             options: {
                 banner: '<%= banner %>'
