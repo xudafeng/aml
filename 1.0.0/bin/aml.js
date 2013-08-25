@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-08-25 19:18:45
+ * Latest build : 2013-08-25 20:07:42
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -83,9 +83,7 @@ var isFunction = isType("Function")
  * 参考：https://github.com/xudafeng/xdfjs
  */
 
-/**
- * 避免重复
- */
+var VERSION = '1.0.0';
 /**
  * module : 出口模块
  * author : xudafeng@126.com
