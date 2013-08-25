@@ -5,3 +5,6 @@
  */
 ;(function(window, undefined) {
     'use strict';
+if (window.aml) {
+    return
+};

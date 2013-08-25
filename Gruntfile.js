@@ -1,3 +1,7 @@
+/**
+ * 自动打包压缩
+ * @param grunt
+ */
 module.exports = function(grunt) {
     /**
      * 与文件名对应
@@ -13,7 +17,27 @@ module.exports = function(grunt) {
         buildPath = '/bin',
         cfgFile = packageName + '.json',
         jsSuffix = '.js',
-        buildTime = grunt.template.today("yyyy-mm-dd H:MM:ss");
+        buildTime = grunt.template.today("yyyy-mm-dd H:MM:ss"),
+
+        banner = [
+            '/* ================================================================\n',
+            ' * '+ name +'.js v'+ version +'\n',
+            ' *\n',
+            ' * '+ description +'\n',
+            ' * Latest build : '+ buildTime +'\n',
+            ' *\n',
+            ' * ' + page + '\n',
+            ' * ================================================================\n',
+            ' * Copyright 2013 '+ author +'\n',
+            ' *\n',
+            ' * Licensed under the <%= '+ packageName +'.licenses[0].type %> License\n',
+            ' * You may not use this file except in compliance with the License.\n',
+            ' *\n',
+            ' * <%= '+ packageName +'.licenses[0].url %>\n',
+            ' * ================================================================ */\n\n\n'
+        ].join(''),
+
+        tinyBanner = '/*! '+name + ' v' + version + ' ' + author + ' ' + buildTime + ' */\n';
     /**
      * 文件队列映射
      * @type {Array}
@@ -24,6 +48,18 @@ module.exports = function(grunt) {
             concat : true
         },{
             name : 'config',
+            concat : true
+        },{
+            name : 'util/type',
+            concat : true
+        },{
+            name : 'util/path',
+            concat : true
+        },{
+            name : 'util/loader',
+            concat : true
+        },{
+            name : 'util/depend',
             concat : true
         },
         {
@@ -59,20 +95,7 @@ module.exports = function(grunt) {
          *  导入配置文件
          */
         package: grunt.file.readJSON(cfgFile),
-        banner: ['/* ================================================================\n',
-                 ' * '+ name +'.js v'+ version +'\n',
-                 ' *\n',
-                 ' * '+ description +'\n',
-                 ' *\n',
-                 ' * ' + page + '\n',
-                 ' * ================================================================\n',
-                 ' * Copyright 2013 '+ author +'\n',
-                 ' *\n',
-                 ' * Licensed under the <%= '+ packageName +'.licenses[0].type %> License\n',
-                 ' * you may not use this file except in compliance with the License.\n',
-                 ' *\n',
-                 ' * <%= '+ packageName +'.licenses[0].url %>\n',
-                 ' * ================================================================ */\n\n\n'].join(''),
+        banner: banner,
         concat: {
             options: {
                 banner: '<%= banner %>'
@@ -87,7 +110,7 @@ module.exports = function(grunt) {
          */
         uglify: {
             options: {
-                banner: '/*! '+name + ' v' + version + ' ' + author + ' ' + buildTime + ' */\n'
+                banner: tinyBanner
             },
             build: {
                 src: version + buildPath + '/' + name + jsSuffix,
