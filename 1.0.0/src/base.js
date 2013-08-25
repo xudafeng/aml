@@ -7,6 +7,4 @@
  * 参考：https://github.com/xudafeng/xdfjs
  */
 
-/**
- * 避免重复
- */
+var VERSION = '1.0.0';
