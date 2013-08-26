@@ -1,0 +1,1 @@
+var aml={version:VERSION,mix:mix};function mix(r,s){for(var i in s){r[i]=s[i]}return r}
