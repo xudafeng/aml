@@ -5,6 +5,9 @@
  */
 ;(function(window, undefined) {
     'use strict';
-if (window.aml) {
-    return
-};
+    /**
+     * 阻止重复解析
+     */
+    if (window.aml) {
+        return
+    };

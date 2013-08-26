@@ -47,7 +47,10 @@ module.exports = function(grunt) {
             name : 'intro',
             concat : true
         },{
-            name : 'config',
+            name : 'static',
+            concat : true
+        },{
+            name : 'base',
             concat : true
         },{
             name : 'util/type',
@@ -63,10 +66,10 @@ module.exports = function(grunt) {
             concat : true
         },
         {
-            name : 'base',
+            name : 'loader',
             concat : true
         },{
-            name : 'loader',
+            name : 'config',
             concat : true
         },{
             name : 'outro',
@@ -110,7 +113,8 @@ module.exports = function(grunt) {
          */
         uglify: {
             options: {
-                banner: tinyBanner
+                banner: tinyBanner,
+                sourceMap: version + buildPath + '/' + name + ".map"
             },
             build: {
                 src: version + buildPath + '/' + name + jsSuffix,

@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-08-25 20:07:42
+ * Latest build : 2013-08-26 9:05:30
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -22,71 +22,96 @@
  */
 ;(function(window, undefined) {
     'use strict';
-if (window.aml) {
-    return
-};
+    /**
+     * 阻止重复解析
+     */
+    if (window.aml) {
+        return
+    };
 
-/**
- * module   : config 配置模块
- * author   : xudafeng@126.com
- * build    : 2013.7.4
- *
- * 声明静态变量
- */
+    /**
+     * 定义全局静态变量
+     */
+    var VERSION = '1.0.0';
+    var EMPTY = '';
+    var HEAD = document.head || document.getElementsByTagName('head')[0] || document.documentElement;
+    var DOC = document;
+    var LOC = location;
+    /**
+     * file   : base.js
+     * module : base 基础模块
+     * author : xudafeng@126.com
+     * build  : 2013.7.4
+     *
+     * 基础框架
+     * 参考：https://github.com/xudafeng/xdfjs
+     */
+     var aml = {
+         version : VERSION
+        ,mix : mix
+     };
+     function mix (r,s){
+        for(var i in s){
+            r[i] = s[i];
+        };
+        return r;
+     };
+    /**
+     * file   : type.js
+     * module : type 类型检测模块
+     * author : xudafeng@126.com
+     * build  : 2013.7.4
+     */
+    /**
+     * 数据类型检测
+     */
+    function _typeof(type){
+        return function(obj){
+            return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+        };
+    };
+    var isString = _typeof('String');
+    var isObject = _typeof('Object');
+    var isFunction = _typeof('Function');
+    var isFunction = _typeof('Undefined');
 
-/**
- * module : type 类型模块
- * author : xudafeng@126.com
- * build  : 2013.7.4
- */
+    /**
+     * 通用类型检测
+     */
+    var isJS = /\.js$/i;
+    var isCSS = /\.css$/i;
 
-__isXDF = function(source,option){
+    /**
+     * module : path 模块
+     * author : xudafeng@126.com
+     * build  : 2013.7.4
+     */
 
-    return  option ==  Object.prototype.toString.call(source);
-}
+    /**
+     *
+     */
+    /**
+     * module : loader 加载模块
+     * author : xudafeng@126.com
+     * build  : 2013.7.4
+     */
+    /**
+    * module : depend 依赖模块
+    * author : xudafeng@126.com
+    * build  : 2013.7.4
+    */
+    /**
+     * module   : config 配置模块
+     * author   : xudafeng@126.com
+     * build    : 2013.7.4
+     *
+     * 声明静态变量
+     */
 
-function isType(type) {
-    return function(obj) {
-        return {}.toString.call(obj) == "[object " + type + "]"
-    }
-}
-
-var isObject = isType("Object")
-var isString = isType("String")
-var isArray = Array.isArray || isType("Array")
-var isFunction = isType("Function")
-/**
- * module : path 模块
- * author : xudafeng@126.com
- * build  : 2013.7.4
- */
-
-/**
- *
- */
-/**
- * module : loader 加载模块
- * author : xudafeng@126.com
- * build  : 2013.7.4
- */
-/**
- * module : depend 依赖模块
- * author : xudafeng@126.com
- * build  : 2013.7.4
- */
-/**
- * module : base 基础模块
- * author : xudafeng@126.com
- * build  : 2013.7.4
- *
- * 基础框架
- * 参考：https://github.com/xudafeng/xdfjs
- */
-
-var VERSION = '1.0.0';
 /**
  * module : 出口模块
  * author : xudafeng@126.com
  * build  : 2013.7.4
  */
+    window.aml = aml;
 }(this));
