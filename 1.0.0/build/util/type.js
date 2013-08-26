@@ -1,1 +1,0 @@
-function _typeof(type){return function(obj){return Object.prototype.toString.call(obj)==="[object "+type+"]"}}var isString=_typeof("String");var isObject=_typeof("Object");var isFunction=_typeof("Function");var isFunction=_typeof("Undefined");var isJS=/\.js$/i;var isCSS=/\.css$/i;
