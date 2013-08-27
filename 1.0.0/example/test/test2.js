@@ -1,9 +1,9 @@
 /**
- * 2 Ä£¿é¹¦ÄÜ
+ * 2 æ¨¡å—åŠŸèƒ½
  *
- * ÒÔÏÂÄÚÈİÏò isapp Ôö¼ÓÄ£¿é»¯¹¦ÄÜ
+ * ä»¥ä¸‹å†…å®¹å‘ isapp å¢åŠ æ¨¡å—åŒ–åŠŸèƒ½
  *
- * isapp.add() => isapp.use(), Ä£¿éĞèÏÈ¶¨Òå, È»ºó²ÅÄÜÊ¹ÓÃ
+ * isapp.add() => isapp.use(), æ¨¡å—éœ€å…ˆå®šä¹‰, ç„¶åæ‰èƒ½ä½¿ç”¨
  * */
 ;(function () {
     var model;
@@ -119,7 +119,7 @@
     };
 
     /**
-     * ´æ´¢ËùÓĞ Module ÊµÀı
+     * å­˜å‚¨æ‰€æœ‰ Module å®ä¾‹
      * */
     ms = {};
 
@@ -142,15 +142,15 @@
          * Req.list = Req.list.concat(src);
          * src = Req.list.shift();
          *
-         * ¼ÇÂ¼
-         * ²ÉÓÃ×¢ÊÍÄÚµÄ·½Ê½»ñÈ¡Î´¼ÓÔØµÄ js ÎÄ¼ş »á²úÉúÒ»¸öÎÊÌâ£º
-         * 		Req.list Êı×éÖĞÓĞÒ»¸ö a.js£¬ÕıÈ·¼ÓÔØÖ®ºó ÓÖ ĞèÒªÒıÓÃ a.js£¬
-         * 		´ËÊ±£¬Req.list Êı×éÖĞÒÑ¾­ÓÖÓĞ a.js£¬ËùÒÔ concat º¯Êı»áÔÙÒ»´Î
-         * 		°Ñ a.js ¼ÓÈëÊı×éÖĞ£¬ÔÙÒ»´ÎÇëÇó js ÎÄ¼ş¡£
-         * 		Õâ¸öÎÊÌâÆäÊµÔÚ model.use º¯ÊıÖĞÒÑ¾­¹æ±ÜÁË£¬
-         * 		ÒòÎª use º¯Êı»á¼ÇÂ¼Ã¿¸öÄ£¿éµÄ¼ÓÔØÇé¿ö£¬Ò²¾Í²»»áÔÙ´Î¶ÔÏàÍ¬µÄ js ÎÄ¼ş½øĞĞ require¡£
-         * 		µ«ÊÇÔÚµ¥¶À²âÊÔ require ·½·¨Ê±£¬Õâ¸öÎÊÌâ³öÏÖÁË£¬ËùÒÔÎÒÔÙÌí¼ÓÒ»²ã¼ÇÂ¼£¬
-         * 		ÔÚ require ²ã¼ÇÂ¼ËùÓĞÒıÈëµÄ js ÎÄ¼ş¡£
+         * è®°å½•
+         * é‡‡ç”¨æ³¨é‡Šå†…çš„æ–¹å¼è·å–æœªåŠ è½½çš„ js æ–‡ä»¶ ä¼šäº§ç”Ÿä¸€ä¸ªé—®é¢˜ï¼š
+         * 		Req.list æ•°ç»„ä¸­æœ‰ä¸€ä¸ª a.jsï¼Œæ­£ç¡®åŠ è½½ä¹‹å åˆ éœ€è¦å¼•ç”¨ a.jsï¼Œ
+         * 		æ­¤æ—¶ï¼ŒReq.list æ•°ç»„ä¸­å·²ç»åˆæœ‰ a.jsï¼Œæ‰€ä»¥ concat å‡½æ•°ä¼šå†ä¸€æ¬¡
+         * 		æŠŠ a.js åŠ å…¥æ•°ç»„ä¸­ï¼Œå†ä¸€æ¬¡è¯·æ±‚ js æ–‡ä»¶ã€‚
+         * 		è¿™ä¸ªé—®é¢˜å…¶å®åœ¨ model.use å‡½æ•°ä¸­å·²ç»è§„é¿äº†ï¼Œ
+         * 		å› ä¸º use å‡½æ•°ä¼šè®°å½•æ¯ä¸ªæ¨¡å—çš„åŠ è½½æƒ…å†µï¼Œä¹Ÿå°±ä¸ä¼šå†æ¬¡å¯¹ç›¸åŒçš„ js æ–‡ä»¶è¿›è¡Œ requireã€‚
+         * 		ä½†æ˜¯åœ¨å•ç‹¬æµ‹è¯• require æ–¹æ³•æ—¶ï¼Œè¿™ä¸ªé—®é¢˜å‡ºç°äº†ï¼Œæ‰€ä»¥æˆ‘å†æ·»åŠ ä¸€å±‚è®°å½•ï¼Œ
+         * 		åœ¨ require å±‚è®°å½•æ‰€æœ‰å¼•å…¥çš„ js æ–‡ä»¶ã€‚
          * */
 
         Req.list = Req.list.concat(src);
@@ -204,7 +204,7 @@
         }
     };
 
-    // ·½·¨½áÊø
+    // æ–¹æ³•ç»“æŸ
 
     /**
      * @param name string or array
@@ -230,7 +230,7 @@
             isArr(requires) ? '' : requires = [requires];
             for (i = 0, length = requires.length; i < length; i++) {
                 require = model.trim(requires[i]);
-                ('' == require || /\s/.test(require)) && log('Module £º required module\'s name can\'t cantain any blanks(<' + require + '>)', 2);
+                ('' == require || /\s/.test(require)) && log('Module ï¼š required module\'s name can\'t cantain any blanks(<' + require + '>)', 2);
                 if (!ms[require]) {
                     config = {file : 1};
                     if (/\?/.test(require)) {
@@ -339,7 +339,7 @@
     }
 
     /**
-     * ·µ»ØÖ¸¶¨ module
+     * è¿”å›æŒ‡å®š module
      * */
     function getModule(name) {
         var module = ms[name];
@@ -357,14 +357,14 @@
     }
 
     /**
-     * ÅĞ¶Ï module ÊÇ·ñÒÑ¶¨Òå
+     * åˆ¤æ–­ module æ˜¯å¦å·²å®šä¹‰
      * */
     function hasModule(name) {
         return model.index(list(), name) > -1;
     }
 
     /**
-     * µ½´¦ module
+     * åˆ°å¤„ module
      * */
     function exports(name, alias, context) {
         var module;
@@ -376,7 +376,7 @@
     }
 
     /**
-     * ·µ»Ø module ÁĞ±í
+     * è¿”å› module åˆ—è¡¨
      * */
     function list() {
         var m, list=[], length = 0;
@@ -387,14 +387,14 @@
     }
 
     /**
-     * ÒÆ³ı module
+     * ç§»é™¤ module
      * */
     function remove(name) {
         return ms[name] && delete ms[name];
     }
 
     /**
-     * ·¢Æğ css ÇëÇó
+     * å‘èµ· css è¯·æ±‚
      * @param {href} string or array, '.css' can be ellipsised
      * @param {media} optional
      * */
@@ -421,7 +421,7 @@
     }
 
     /**
-     * Ô¤ÏÂÔØÍ¼Æ¬
+     * é¢„ä¸‹è½½å›¾ç‰‡
      * */
     function preImage(src, root) {
         root= root ? model.trim(root) : '';
@@ -433,9 +433,9 @@
         return base;
     }
 
-    // ·½·¨½áÊø
+    // æ–¹æ³•ç»“æŸ
 
-    // base ¶ÔÍâ¿ª·Å api ¿ªÊ¼
+    // base å¯¹å¤–å¼€æ”¾ api å¼€å§‹
 
     model.add = add;
     model.use = use;

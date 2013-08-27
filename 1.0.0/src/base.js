@@ -9,11 +9,17 @@
      */
      var aml = {
          version : VERSION
-        ,mix : mix
+        ,extend : extend
      };
-     function mix (r,s){
+     function extend (r,s){
+         while(arguments.length === 1){
+            arguments.pop();
+         }
         for(var i in s){
             r[i] = s[i];
         };
         return r;
      };
+     var xdf = {};
+     xdf = extend(xdf,{name1:1},{name2:1},{name3:1},{name4:1});
+    console.log(xdf)

@@ -161,10 +161,10 @@
         /**
          * Copies all the properties of s to r.
          * @method mix
-         * @param r {Object} Ä¿±ê¶ÔÏó
-         * @param s {Object} Ô´¶ÔÏó
-         * @param ov {Boolean} ÊÇ·ñÇ¿ÖÆ¸²¸Ç
-         * @param wl {Array} Èç¹û´æÔÚ°×Ãûµ¥,Ö»¸²¸Ç°×Ãûµ¥ÄÚµÄ¶ÔÏó.
+         * @param r {Object} ç›®æ ‡å¯¹è±¡
+         * @param s {Object} æºå¯¹è±¡
+         * @param ov {Boolean} æ˜¯å¦å¼ºåˆ¶è¦†ç›–
+         * @param wl {Array} å¦‚æœå­˜åœ¨ç™½åå•,åªè¦†ç›–ç™½åå•å†…çš„å¯¹è±¡.
          * @return {Object} the augmented object
          */
         mix: mix,
@@ -188,7 +188,7 @@
         /**
          * Clone Object
          * @method clone
-         * @param o {Object} Ô´¶ÔÏó
+         * @param o {Object} æºå¯¹è±¡
          * @return {Object} the object cloned
          */
         clone: function(o){
@@ -241,10 +241,10 @@
         /**
          * Substitutes keywords in a string using an object/array.
          * Removes undefined keywords and ignores escaped keywords.
-         * @param str {String}Ä£°å×Ö·û´®
-         * @param o {String}Ä£°åÊı¾İ
-         * @param regexp {String}Ìæ»»ÓÃÕıÔò ¿ÉÒÔÓÃÀ´´úÌæÄ¬ÈÏÖµ
-         * @param multiSubstitute {Boolean} ÊÇ·ñÖ§³Ö¶à´Îsubstitute Îªtrue,strÖĞµÄÄ£°åÈç¹ûÆ¥Åä²»µ½½«±»±£Áô¶ø²»ÊÇÖÃ¿Õ.
+         * @param str {String}æ¨¡æ¿å­—ç¬¦ä¸²
+         * @param o {String}æ¨¡æ¿æ•°æ®
+         * @param regexp {String}æ›¿æ¢ç”¨æ­£åˆ™ å¯ä»¥ç”¨æ¥ä»£æ›¿é»˜è®¤å€¼
+         * @param multiSubstitute {Boolean} æ˜¯å¦æ”¯æŒå¤šæ¬¡substitute ä¸ºtrue,strä¸­çš„æ¨¡æ¿å¦‚æœåŒ¹é…ä¸åˆ°å°†è¢«ä¿ç•™è€Œä¸æ˜¯ç½®ç©º.
          */
         substitute: function(str, o, regexp, multiSubstitute){
             if (!S.iS(str) || !S.iPO(o)) {
@@ -269,9 +269,9 @@
          *      timeout: number
          *  });
          * </pre>
-         * @param url {String} ÎÄ¼şµØÖ·
-         * @param success {Function|Object} »Øµ÷º¯Êı
-         * @param charset {String} ×Ö·û´®
+         * @param url {String} æ–‡ä»¶åœ°å€
+         * @param success {Function|Object} å›è°ƒå‡½æ•°
+         * @param charset {String} å­—ç¬¦ä¸²
          */
         getScript: function(url, success, charset, expando){
             var isCSS = RE_CSS.test(url), node = doc.createElement(isCSS ? 'link' : 'script');
@@ -362,8 +362,8 @@
         /**
          * Start load specific mods, and fire callback when these mods and requires are attached.<br/>
          * S.use('mod-name',function(S){});
-         * @param modNames {String} ²»Í¬Ä£¿é¼äÒÔ¶ººÅ(,)·Ö¸ô
-         * @param callback {Function} Ïà¹Ø´úÂëÒıÈë³É¹¦ºóµÄ»Øµ÷º¯Êı
+         * @param modNames {String} ä¸åŒæ¨¡å—é—´ä»¥é€—å·(,)åˆ†éš”
+         * @param callback {Function} ç›¸å…³ä»£ç å¼•å…¥æˆåŠŸåçš„å›è°ƒå‡½æ•°
          */
         use: function(modNames, callback){
             modNames = modNames.split(',');

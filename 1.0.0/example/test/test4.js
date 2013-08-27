@@ -2,14 +2,14 @@
     var VERSION = '0.2',
         curScriptNode = (function(scripts, node) {
             scripts = DOC.getElementsByTagName('script');
-            node = scripts[scripts.length - 1]; //FFÏÂ¿ÉÒÔÊ¹ÓÃDOC.currentScript
+            node = scripts[scripts.length - 1]; //FFä¸‹å¯ä»¥ä½¿ç”¨DOC.currentScript
             return node;
         })(),
         isDebug = !! curScriptNode.getAttribute('debug'),
         MixJSName = curScriptNode.getAttribute('name') || 'MixJS',
         CHARSET = curScriptNode.getAttribute('charset') || 'utf-8',
 
-    //»ñÈ¡µ±Ç°ÎÄ¼ş¸¸Â·¾¶
+    //è·å–å½“å‰æ–‡ä»¶çˆ¶è·¯å¾„
         PATH = (function(node) {
             var url = node.hasAttribute ? // non-IE6/7
                 node.src :
@@ -29,7 +29,7 @@
         _emptyFn = function() {},
         _arrSlice = _emptyArr.slice,
         /**
-         * Êı×é±éÀú
+         * æ•°ç»„éå†
          * @param  {[type]}   arr      [description]
          * @param  {Function} callback [description] arrvalue index arr
          * @param  {[type]}   scope    [description]
@@ -49,7 +49,7 @@
     var config = {
             path: PATH,
             perload: _emptyArr,
-            //Ô¤ÏÈ¼ÓÔØ¿â
+            //é¢„å…ˆåŠ è½½åº“
             debug: isDebug,
             charset: CHARSET
         },
@@ -57,15 +57,15 @@
         regAlias = /^[-\w\d_$]{2,}$/i,
         _moduleDepsMap = {},
         _filesMap = {},
-    //1:¼ÓÔØÖ®Ç°£¬2:¼ÓÔØÖĞ£¬3:¼ÓÔØÍê³É
-        _modulesMap = {}; //1£º¶¨ÒåÖ®Ç° 2£ºµÈ´ıÒÀÀµ¹ØÏµÖĞ 3£º¶¨ÒåÍê³É
+    //1:åŠ è½½ä¹‹å‰ï¼Œ2:åŠ è½½ä¸­ï¼Œ3:åŠ è½½å®Œæˆ
+        _modulesMap = {}; //1ï¼šå®šä¹‰ä¹‹å‰ 2ï¼šç­‰å¾…ä¾èµ–å…³ç³»ä¸­ 3ï¼šå®šä¹‰å®Œæˆ
     var $ = {
         VERSION: VERSION,
         path:PATH,
         /**
-         * ±ğÃû»úÖÆ
-         * @param  {String} name Ãû×Ö
-         * @param  {String} realpath  ±ğÃûÕæÊµurl
+         * åˆ«åæœºåˆ¶
+         * @param  {String} name åå­—
+         * @param  {String} realpath  åˆ«åçœŸå®url
          * @return {[type]}      [description]
          */
         alias: function(name,arr){
@@ -79,7 +79,7 @@
                 }
 
             }else{
-                throw new Error('MixJS.alias name ¸ñÊ½´íÎó');
+                throw new Error('MixJS.alias name æ ¼å¼é”™è¯¯');
             }
             return this;
         },
@@ -133,7 +133,7 @@
         },
         define: function(name, deps, factory) {
             if(!$.isString(name)) {
-                throw new Error('MixJS.define: name ±ØĞëÎª×Ö·û´®');
+                throw new Error('MixJS.define: name å¿…é¡»ä¸ºå­—ç¬¦ä¸²');
             }
             if($.isFunction(deps)) {
                 factory = deps;
@@ -168,7 +168,7 @@
 
 
 
-    //»ù±¾ÀàĞÍÅĞ¶Ï
+    //åŸºæœ¬ç±»å‹åˆ¤æ–­
     'Function,String,Array,Number'.replace(reg, function(t) {
         $['is' + t] = function(s) {
             return isType(s, t)
@@ -192,12 +192,12 @@
     };
 
 
-    //ÊÍ·Åµ½window
+    //é‡Šæ”¾åˆ°window
     global[MixJSName] = $;
     MixJSName !== 'MixJS' && (global.MixJS = $);
 
     /**
-     * ÅĞ¶ÏÄ£¿éÊÇ·ñ¶¨Òå
+     * åˆ¤æ–­æ¨¡å—æ˜¯å¦å®šä¹‰
      * @param  {[type]} module [description]
      * @return {[type]}        [description]
      */
@@ -207,7 +207,7 @@
         return _modulesMap[module] === 3;
     }
     /**
-     * ÅĞ¶ÏÎÄ¼şÊÇ·ñ¼ÓÔØ
+     * åˆ¤æ–­æ–‡ä»¶æ˜¯å¦åŠ è½½
      * @param  {[type]} file [description]
      * @return {[type]}      [description]
      */
@@ -219,7 +219,7 @@
 
 
     /**
-     * Êı×éÈ¥ÖØ¸´ÏîºÍÈ¥³ı¿ÕÏî
+     * æ•°ç»„å»é‡å¤é¡¹å’Œå»é™¤ç©ºé¡¹
      * @param  {[type]} arr [description]
      * @return {[type]}     [description]
      */
@@ -240,7 +240,7 @@
                 obj[val] = 1;
                 back.push(val);
 
-                isFromDefine === 'define' && (Module.parentModule[val] = mName); //¶¨Òå¸¸Ä£¿é
+                isFromDefine === 'define' && (Module.parentModule[val] = mName); //å®šä¹‰çˆ¶æ¨¡å—               
             }
         }
         obj = null;
@@ -249,7 +249,7 @@
 
 
     /**
-     * ¼ì²âÒÀÀµ¹ØÏµÊÇ·ñ¶¼¼ÓÔØÍê³É
+     * æ£€æµ‹ä¾èµ–å…³ç³»æ˜¯å¦éƒ½åŠ è½½å®Œæˆ
      * _moduleDepsMap = {
      *     test.a:[a,b,c]
      *     a:[d,e]
@@ -270,15 +270,15 @@
             var m = arr[i];
 
             if(m===module){
-                throw new Error(module + '£º ·¢ÏÖÑ­»·ÒÀÀµ');
+                throw new Error(module + 'ï¼š å‘ç°å¾ªç¯ä¾èµ–');
             }
             if(obj[m] === 1) {
-                //¼òµ¥È¥ÖØ£¬²»ÄÜ±£Ö¤¶ş´ÎÒÀÀµÈ¥ÖØ¸´
+                //ç®€å•å»é‡ï¼Œä¸èƒ½ä¿è¯äºŒæ¬¡ä¾èµ–å»é‡å¤
                 continue;
             }
 
             if(regAlias.test(m) && alias[m]){
-                //Èç¹ûÊÇaliasÄ£¿é
+                //å¦‚æœæ˜¯aliasæ¨¡å—
                 if(loaded(alias[m])){
                     obj[m] = 1;
                     continue;
@@ -288,7 +288,7 @@
             }
 
             if(regISCSS.test(m)){
-                //Èç¹ûÊÇcssÎÄ¼ş
+                //å¦‚æœæ˜¯cssæ–‡ä»¶
                 if(loaded(getPath(m)[0])){
                     obj[m] = 1;
                     continue;
@@ -314,22 +314,22 @@
         return back;
     }
 
-    var _waitModule = {}; //µÈ´ı×ªÕıµÄmoduleÊµÀı
+    var _waitModule = {}; //ç­‰å¾…è½¬æ­£çš„moduleå®ä¾‹
     /**
-     * Ä£¿éÀà
-     * @param {[type]} id    Ä£¿éÃû³Æ
-     * @param {Array} deps  ÒÀÀµÄ£¿é
-     * @param {[type]} maker ÖÆÔìº¯Êı
-     * @param {[type]} root  ¸¸Ä£¿é£¬Ä¬ÈÏÊÇMixJS
+     * æ¨¡å—ç±»
+     * @param {[type]} id    æ¨¡å—åç§°
+     * @param {Array} deps  ä¾èµ–æ¨¡å—
+     * @param {[type]} maker åˆ¶é€ å‡½æ•°
+     * @param {[type]} root  çˆ¶æ¨¡å—ï¼Œé»˜è®¤æ˜¯MixJS
      */
 
     function Module(id, deps, maker, root) {
 
         this.id = id;
-        this.deps = deps; //±ØĞëÊÇÊı×é
+        this.deps = deps; //å¿…é¡»æ˜¯æ•°ç»„
         this.maker = maker;
         this.root = root || $;
-        // _modulesMap[id] = 1;//¶¨ÒåÖ®Ç°
+        // _modulesMap[id] = 1;//å®šä¹‰ä¹‹å‰
         // this.queue = new Queue();
         if(checkDeps(id)) {
 
@@ -359,7 +359,7 @@
         if(!this.id) {
             return;
         }
-        // _modulesMap[this.id] = 2;//¶¨ÒåµÈ´ıÖĞ£¬¿ÉÄÜÒòÎªÒÀÀµ¹ØÏµÃ»ÓĞ¼ÓÔØ¶ø´¦ÓÚµÈ´ıÖĞ
+        // _modulesMap[this.id] = 2;//å®šä¹‰ç­‰å¾…ä¸­ï¼Œå¯èƒ½å› ä¸ºä¾èµ–å…³ç³»æ²¡æœ‰åŠ è½½è€Œå¤„äºç­‰å¾…ä¸­
         if(!checkDeps(this.id)) {
 
             return;
@@ -371,7 +371,7 @@
         var name;
         while(name = names.shift()) {
             if(names.length) {
-                // console.log(root);
+                // console.log(root);            
                 root = (root[name] = root[name] || {});
             } else {
                 if($.isUndefined(root[name])) {
@@ -380,13 +380,13 @@
                         var f = $.isFunction(this.maker) && this.maker(this.root);
                         if(f) {
 
-                            f['@GOD'] = 'THEO'; //¼Ó¸öÎ²°Í~
+                            f['@GOD'] = 'THEO'; //åŠ ä¸ªå°¾å·´~
                             root[name] = f;
                             _modulesMap[this.id] = 3;
 
                         }
                     } catch(e) {
-                        // Module._definedModulesMap[this.id] = 2;//Ä£¿é¶¨Òå¿ÉÄÜ³ö´íÁË
+                        // Module._definedModulesMap[this.id] = 2;//æ¨¡å—å®šä¹‰å¯èƒ½å‡ºé”™äº†
                         throw new Error('Module.namespace error:id=>' + this.id + ',info=>' + e.message);
                     }
                 }
@@ -406,17 +406,17 @@
     }
 
     var regProtocol = /^(\w+)(\d)?:.*/,
-    //Ğ­Òé
+    //åè®®
         regISJS = /\.js$/i,
-    //ÊÇ·ñÎªjs
+    //æ˜¯å¦ä¸ºjs
         regISCSS = /\.css$/i,
-    //ÊÇ·ñÎªcss
+    //æ˜¯å¦ä¸ºcss
         regRelative = /\.\.\//g,
-    //Ïà¶ÔÂ·¾¶´¦Àí
-        regEXT = /\.(\w+)$/; //ºó×º2~4
+    //ç›¸å¯¹è·¯å¾„å¤„ç†
+        regEXT = /\.(\w+)$/; //åç¼€2~4
     /**
-     * »ñÈ¡ÕæÊµurl
-     * À´×Ômassframework
+     * è·å–çœŸå®url
+     * æ¥è‡ªmassframework
      * @param  {[type]} url [description]
      * @return {[type]}     [description]
      */
@@ -426,23 +426,23 @@
 
         root = root || config.path;
         root = root.substr(0, root.lastIndexOf('/'));
-        id = url;//Ä£¿éid
+        id = url;//æ¨¡å—id
 
         if(regAlias.test(url) && alias[url]){
             ret = alias[url];
 
-        }else if(regProtocol.test(url)) { //Èç¹ûÓÃ»§Â·¾¶°üº¬Ğ­Òé
+        }else if(regProtocol.test(url)) { //å¦‚æœç”¨æˆ·è·¯å¾„åŒ…å«åè®®
             ret = url;
         } else {
             var tmp = url.charAt(0),
                 _2 = url.slice(0, 2);
 
-            if(tmp !== '.' && tmp !== '/') { //Ïà¶ÔÓÚ¸ùÂ·¾¶
+            if(tmp !== '.' && tmp !== '/') { //ç›¸å¯¹äºæ ¹è·¯å¾„
                 ret = root + '/' + url;
-            } else if(_2 === './') { //Ïà¶ÔÓÚĞÖµÜÂ·¾¶
+            } else if(_2 === './') { //ç›¸å¯¹äºå…„å¼Ÿè·¯å¾„
                 id = url.substr(2);
                 ret = root + '/' + id;
-            } else if(_2 === '..') { //Ïà¶ÔÓÚ¸¸Â·¾¶
+            } else if(_2 === '..') { //ç›¸å¯¹äºçˆ¶è·¯å¾„
                 // var arr = root.replace(/\/$/, '').split('/');
                 var arr = root.split('/');
                 regRelative.lastIndex = 0;
@@ -455,19 +455,19 @@
             }
         }
 
-        var ext = 'js'; //Ä¬ÈÏÊÇjsÎÄ¼ş
+        var ext = 'js'; //é»˜è®¤æ˜¯jsæ–‡ä»¶
         tmp = ret.replace(/[?#].*/, '');
         if(regEXT.test(tmp)) {
             ext = RegExp.$1;
         }
-        if(ext !== 'css' && tmp === ret && !regISJS.test(ret)) { //Èç¹ûÃ»ÓĞºó×ºÃû»á²¹ÉÏ.js
+        if(ext !== 'css' && tmp === ret && !regISJS.test(ret)) { //å¦‚æœæ²¡æœ‰åç¼€åä¼šè¡¥ä¸Š.js
             ret += '.js';
         }
         return [ret, ext, id];
     }
 
     /**
-     * Ò»¸ö¼òµ¥¶ÓÁĞ
+     * ä¸€ä¸ªç®€å•é˜Ÿåˆ—
      * @param {[type]} id [description]
      */
 
@@ -475,9 +475,9 @@
         this.id = id;
         this.taskList = [];
     }
-    Queue.useCallback = {}; //·ÅÖÃuseÊ¹ÓÃµÄcallback
+    Queue.useCallback = {}; //æ”¾ç½®useä½¿ç”¨çš„callback
     /**
-     * ´Óºó²¿ÍÆÈë
+     * ä»åéƒ¨æ¨å…¥
      * @param  {Function} fn    [description]
      * @param  {[type]}   args  [description]
      * @param  {[type]}   scope [description]
@@ -502,7 +502,7 @@
         return this;
     }
     /**
-     * ´Óºó²¿µ¯³ö
+     * ä»åéƒ¨å¼¹å‡º
      * @return {[type]} [description]
      */
     Queue.prototype.fire = function() {
@@ -525,7 +525,7 @@
 
         this.taskList.length = 0;
         delete this.taskList;
-        delete Queue.useCallback[this.id]; //¼ÇµÃÓÃÍêÒªÏú»Ù×ïÖ¤Å¶~
+        delete Queue.useCallback[this.id]; //è®°å¾—ç”¨å®Œè¦é”€æ¯ç½ªè¯å“¦~
         delete this.id;
         // delete Queue.modules[this.moduleName];
     }
@@ -536,7 +536,7 @@
 
 
     /**
-     * ¼ÓÔØjs
+     * åŠ è½½js
      * @param  {[type]}   url      [description]
      * @param  {Function} callback [description]
      * @param  {[type]}   fail     [description]
@@ -548,7 +548,7 @@
         var node = DOC.createElement('script');
         var args = _arrSlice.call(arguments, 0);
         if($.isString(fail) && args.length === 3) {
-            //Èç¹ûfailÎª×Ö·û´®£¬ÈÏÎªÊÇcharset
+            //å¦‚æœfailä¸ºå­—ç¬¦ä¸²ï¼Œè®¤ä¸ºæ˜¯charset
             charset = fail;
         } else if(args.length === 4 && $.isString(charset)) {
 
@@ -564,7 +564,7 @@
         return $;
     }
 
-    //jscallback¼ì²â
+    //jscallbackæ£€æµ‹
     var regJSLOAD = /loaded|complete|undefined/;
 
     function jsCallback(node, callback, fail) {
@@ -577,7 +577,7 @@
         }
 
     }
-    //js¿ÉÒÔ¼ì²âerror£¬ËùÒÔ¼ÓÉÏÁËÕâ¸öº¯Êı
+    //jså¯ä»¥æ£€æµ‹errorï¼Œæ‰€ä»¥åŠ ä¸Šäº†è¿™ä¸ªå‡½æ•°
 
     function jsGetCallback(node, cb) {
         return function(e) {
@@ -585,7 +585,7 @@
 
             if(e.type === 'load' || regJSLOAD.test(node.readyState)) {
 
-                //È·±£Ö´ĞĞÒ»´Î+ÄÚ´æ»ØÊÕ
+                //ç¡®ä¿æ‰§è¡Œä¸€æ¬¡+å†…å­˜å›æ”¶
                 node.onload = node.onerror = node.onreadystatechange = null
 
                 if(node.parentNode && !config.debug) {
@@ -600,7 +600,7 @@
 
     }
     /**
-     * ¼ÓÔØcssÎÄ¼ş
+     * åŠ è½½cssæ–‡ä»¶
      * @param  {[type]}   url      [description]
      * @param  {Function} callback [description]
      * @return {[type]}            [description]
@@ -617,7 +617,7 @@
         HEAD.insertBefore(node, BASEELEMENT);
         return $;
     }
-    ///===============>css load¼ì²âÀ´×Ôseajs
+    ///===============>css loadæ£€æµ‹æ¥è‡ªseajs
     // `onload` event is supported in WebKit since 535.23
     // Ref:
     //  - https://bugs.webkit.org/show_activity.cgi?id=38995
@@ -684,9 +684,9 @@
     }
 
     /**
-     * »ñÈ¡ÀàĞÍ
-     * @param  {[type]} obj ÒªÅĞ¶ÏµÄ¶ÔÏó
-     * @return {String}     ·µ»ØÀàĞÍ
+     * è·å–ç±»å‹
+     * @param  {[type]} obj è¦åˆ¤æ–­çš„å¯¹è±¡
+     * @return {String}     è¿”å›ç±»å‹
      */
 
     function isType(obj, type) {
@@ -694,16 +694,16 @@
     }
 
     /**
-     * ôÛÔÓ
-     * @param {Object} target Ô­ÓĞµÄÄ¬ÈÏ
-     * @param {Object} source µÚÈı·½À´Ô´
+     * ç³…æ‚
+     * @param {Object} target åŸæœ‰çš„é»˜è®¤
+     * @param {Object} source ç¬¬ä¸‰æ–¹æ¥æº
      */
 
     function mix(target, source) {
         var args = _arrSlice.call(arguments),
             i = 1,
             key, self = arguments.callee,
-        //Èç¹û×îºó²ÎÊıÊÇ²¼¶û£¬ÅĞ¶¨ÊÇ·ñ¸²Ğ´Í¬ÃûÊôĞÔ
+        //å¦‚æœæœ€åå‚æ•°æ˜¯å¸ƒå°”ï¼Œåˆ¤å®šæ˜¯å¦è¦†å†™åŒåå±æ€§
             ride = $.isBoolean(args[args.length - 1]) ? args.pop() : true;
         if(args.length === 1) {
             target = !this.window ? this : _cleanObj;
@@ -719,7 +719,7 @@
 
                 continue;
             }
-            //ÔÓôÛÖ»ÔÊĞí¶ÔÏó
+            //æ‚ç³…åªå…è®¸å¯¹è±¡
             for(key in source) {
                 if(ride || !(key in target)) {
                     target[key] = source[key];
