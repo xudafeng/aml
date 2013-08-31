@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-08-27 9:44:02
+ * Latest build : 2013-08-31 16:23:34
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -50,10 +50,22 @@
          version : VERSION
         ,extend : extend
      };
-     function extend (r,s){
-         while(arguments.length === 1){
-            arguments.pop();
-         }
+    /**
+     * 对象拷贝
+     * @returns {*}
+     */
+     function extend (){
+        var p = 0,
+            o;
+
+        while( p < arguments.length ){
+
+            !p ? o = arguments[p] : console.log(1);
+            p++;
+        }
+        console.log(o)
+
+        return;
         for(var i in s){
             r[i] = s[i];
         };

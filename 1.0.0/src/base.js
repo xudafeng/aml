@@ -11,10 +11,28 @@
          version : VERSION
         ,extend : extend
      };
-     function extend (r,s){
-         while(arguments.length === 1){
-            arguments.pop();
-         }
+    /**
+     * 对象拷贝
+     * @returns {*}
+     */
+     function extend (){
+        var p = 0,
+            o;
+
+        while( p < arguments.length ){
+
+            (!p ? function(){
+
+                o = arguments[p];
+
+            } : function(){
+
+            })();
+            p++;
+        }
+        console.log(o)
+
+        return;
         for(var i in s){
             r[i] = s[i];
         };
