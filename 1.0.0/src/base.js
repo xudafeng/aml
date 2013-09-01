@@ -12,32 +12,26 @@
         ,extend : extend
      };
     /**
-     * 对象拷贝
+     * 对象混合拷贝
      * @returns {*}
      */
      function extend (){
         var p = 0,
             o;
 
+        function _mix(r,s){
+            for(var i in s){
+                r[i] = s[i];
+            };
+            return r;
+        };
+
         while( p < arguments.length ){
 
-            (!p ? function(){
+            o = !p ? arguments[p] : _mix(o,arguments[p]) ;
 
-                o = arguments[p];
-
-            } : function(){
-
-            })();
             p++;
-        }
-        console.log(o)
 
-        return;
-        for(var i in s){
-            r[i] = s[i];
-        };
-        return r;
+        }
+        return o;
      };
-     var xdf = {};
-     xdf = extend(xdf,{name1:1},{name2:1},{name3:1},{name4:1});
-    console.log(xdf)
