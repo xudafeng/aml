@@ -1,0 +1,155 @@
+<!--#def {
+   "cards": [
+       {
+            "title":"黑色细纹裙付费使用礼包",
+            "currentPrice":"399.00",
+            "type":"fuyou",
+            "totalNum":"1628",
+            "status":"1",
+            "startTimeLong":"12月22日 00:00",
+            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
+            "reportNum":"123",
+            "requestNum":"1000",
+            "endTimeLong":"12月22日 00:00",
+            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
+            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
+       },
+       {
+            "title":"黑色细纹裙付费使用礼包",
+            "currentPrice":"399.00",
+            "type":"fuyou",
+            "totalNum":"1628",
+            "status":"2",
+            "startTimeLong":"12月22日 00:00",
+            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
+            "reportNum":"123",
+            "requestNum":"1000",
+            "endTimeLong":"12月22日 00:00",
+            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
+            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
+       },
+       {
+            "title":"黑色细纹裙付费使用礼包",
+            "currentPrice":"399.00",
+            "type":"fuyou",
+            "totalNum":"1628",
+            "status":"3",
+            "startTimeLong":"12月22日 00:00",
+            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
+            "reportNum":"123",
+            "requestNum":"1000",
+            "endTimeLong":"12月22日 00:00",
+            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
+            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
+       },
+       {
+            "title":"黑色细纹裙付费使用礼包",
+            "currentPrice":"399.00",
+            "type":"free",
+            "totalNum":"1628",
+            "status":"1",
+            "startTimeLong":"12月22日 00:00",
+            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
+            "reportNum":"123",
+            "requestNum":"1000",
+            "endTimeLong":"12月22日 00:00",
+            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
+            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
+       },
+       {
+            "title":"黑色细纹裙付费使用礼包",
+            "currentPrice":"399.00",
+            "type":"free",
+            "totalNum":"1628",
+            "status":"2",
+            "startTimeLong":"12月22日 00:00",
+            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
+            "reportNum":"123",
+            "requestNum":"1000",
+            "endTimeLong":"12月22日 00:00",
+            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
+            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
+       },
+       {
+            "title":"黑色细纹裙付费使用礼包",
+            "currentPrice":"399.00",
+            "type":"free",
+            "totalNum":"1628",
+            "status":"3",
+            "startTimeLong":"12月22日 00:00",
+            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
+            "reportNum":"123",
+            "requestNum":"1000",
+            "endTimeLong":"12月22日 00:00",
+            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
+            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
+       }
+   ]
+}-->
+<link rel="stylesheet" href="try-list.css"/>
+<div class="br_try_on_s">
+    <h4 class="btos_header"></h4>
+    {@each cards as card, index}
+    <div class="br_try_on_card br_inlines">
+        <div class="btoc_left br_inline">
+            <img src="${card.picUrl}" width="360" height="360"/>
+            {@if card.type == 'free'}<div class="btocl_icon "></div>{@/if}
+        </div>
+        <div class="btoc_right br_inline">
+            <div class="btocr_up">
+                <h4>${card.title}</h4>
+                {@if card.type == 'fuyou'}
+                <span class="btoc_normal_text">价值： <span class="btoc_rmb">&yen;</span><span class="btoc_number">${card.currentPrice}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剩余： <span class="btoc_number">${card.requestNum}<span style="color:#999">/${card.totalNum}</span></span>&nbsp;份</span>
+                {@else}
+                <span class="btoc_normal_text">价值： <span class="btoc_rmb">&yen;</span><span class="btoc_number">${card.currentPrice}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提供： <span class="btoc_number">${card.totalNum}</span>份</span>
+                {@/if}
+            </div>
+            <div class="btocr_middle">
+                {@if card.type == 'fuyou'}
+                {@if card.status == 1}
+                <div>只需邮费：<span class="btoc_rmb btocr_font_red">&yen;</span><span class="btoc_number btocr_font_bigest btocr_font_red">399.00</span></div>
+                <a class="btocr_button">付邮试用</a>
+                {@else if card.status == 2}
+                <div>
+                        <span class="btocr_finished">
+                            试用已结束
+                        </span>
+                </div>
+                {@else}
+                <div>
+                        <span class="btocr_date_text">
+                            12<span class="btocr_font_14">月</span>22<span class="btocr_font_14">日</span><span class="btocr_font_16"> 00:00</span>
+                        </span>
+                </div>
+                <a class="btocr_button btocr_button_disable">即将开始</a>
+                {@/if}
+                {@else}
+                {@if card.status == 1}
+                <div>已申请：<span class="btoc_number btocr_font_bigest btocr_font_red">10000</span>人</div>
+                <a class="btocr_button">付邮试用</a>
+                {@else if card.status == 2}
+                <div><span class="btocr_font_gray">试用已结束</span></div>
+                <a class="btocr_link_to_report" href="#">查看报告(123)>></a>
+                {@else}
+                <div>
+                        <span class="btocr_date_text">
+                            12<span class="btocr_font_14">月</span>22<span class="btocr_font_14">日</span><span class="btocr_font_16"> 00:00</span>
+                        </span>
+                </div>
+                <a class="btocr_button btocr_button_disable">即将开始</a>
+                {@/if}
+                {@/if}
+            </div>
+            <div class="btocr_down">
+                <span class="btocr_icon_text">申领条件</span>
+                <p>1.所有会员都可以免费申请，申请成功无需支付邮费</p>
+                <p>2.申请成功需要提交真是原创的试用报告</p>
+            </div>
+            {@if card.status == 2}
+            <em class="btocr_finish_stamp"></em>
+            {@/if}
+        </div>
+        <div class="btoc_shadow br_clearInline"></div>
+    </div>
+    {@/each}
+</div>

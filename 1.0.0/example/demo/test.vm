@@ -1,0 +1,184 @@
+<!--
+#foreach($card in $cards)
+试用标题:$card.title
+价格：$card.currentPrice
+试用类型：$card.type
+总共多少份 ：$card.totalNum
+当前状态：$card.status
+开始时间：$card.startTimeFormate
+试用图片：$card.picUrl
+试用报告个数：$card.reportNum
+报名人数：$card.requestNum
+已经审核通过的人数：$card.acceptNum
+结束时间：$card.endTime
+商品链接：$card.shopItemUrl
+试用DetailURL:$card.detailUrl
+时间$card.startTime
+===========================================================
+#end
+-->
+## 分页相关变量
+#if($totalPage>0)
+    #set($tPage = $totalPage )##int 总页数
+#else
+    #set($tPage = 1 )##int 总页数
+#end
+#if(${currentPage}>0)
+    #set($page = ${currentPage})
+#else
+    #set($page = 1)
+#end
+#set($tPage2 = $tPage)
+
+#set($prePage = $page - 1)
+#set($nextPage = $page + 1)
+##--------------循环页码--------------
+#set($leftStart = 1)
+#set($leftEnd = 2)
+#set($mStart = $page - 2)
+#set($mEnd = $page + 2)
+#set($rStart = $tPage - 1)
+#set($rEnd = $tPage)
+##############################################
+#if($cards.size()>0)
+<div class="br_try_on_s">
+    <h4 class="btos_header">试用中心</h4>
+    #foreach($card in $cards)
+        <div class="br_try_on_card br_inlines">
+            <div class="btoc_left br_inline">
+                <a href="$card.detailUrl"><img src="${card.picUrl}" width="360" height="360"/></a>
+                #if($card.type.typeStr=='free')
+                    <div class="btocl_icon "></div>#end
+            </div>
+            <div class="btoc_right br_inline">
+                <div class="btocr_up">
+                    <h4><a href="$card.detailUrl">${card.title}</a></h4>
+                    #if($card.type.typeStr == 'fuyou')
+                        <span class="btoc_normal_text">价值： <span class="btoc_rmb">&yen;</span><span class="btoc_number">${card.currentPrice}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剩余： <span class="btoc_number">${card.requestNum}<span style="color:#999">/${card.totalNum}</span></span>&nbsp;份</span>
+                    #else
+                        <span class="btoc_normal_text">价值： <span class="btoc_rmb">&yen;</span><span class="btoc_number">${card.currentPrice}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提供： <span class="btoc_number">${card.totalNum}</span>份</span>
+                    #end
+                </div>
+                <div class="btocr_middle">
+                    #if($card.type.typeStr == 'fuyou')
+                        #if($card.status.statusStr=='ing')
+                            <div>只需邮费：<span class="btoc_rmb btocr_font_red">&yen;</span><span class="btoc_number btocr_font_bigest btocr_font_red">399.00</span></div>
+                            <a class="btocr_button" href="$card.detailUrl">付邮试用</a>
+                        #elseif($card.status.statusStr=='ed')
+                            <div>
+                            <span class="btocr_finished">
+                                试用已结束
+                            </span>
+                            </div>
+                        #else
+                            <div>
+                            <span class="btocr_date_text">
+                                $card.startTime.month<span class="btocr_font_14">月</span>$card.startTime.day<span class="btocr_font_14">日</span><span class="btocr_font_16">$card.startTime.hour:$card.startTime.minute</span>
+
+                            </span>
+                            </div>
+                            <a class="btocr_button btocr_button_disable">即将开始</a>
+                        #end
+                    #else
+                        #if($card.status.statusStr=='ing')
+                            <div>已申请：<span class="btoc_number btocr_font_bigest btocr_font_red">$card.requestNum</span>人</div>
+                            <a class="btocr_button" href="$card.detailUrl">免费试用</a>
+                        #elseif($card.status.statusStr=='ed')
+                            <div><span class="btocr_font_gray">试用已结束</span></div>
+                            #if($card.reportNum>0)
+                                <a class="btocr_link_to_report" href="#">查看报告($card.reportNum)>></a>
+                            #end
+                        #else
+                            <div>
+                            <span class="btocr_date_text">
+                                $card.startTime.month<span class="btocr_font_14">月</span>$card.startTime.day<span class="btocr_font_14">日</span><span class="btocr_font_16">$card.startTime.hour:$card.startTime.minute</span>
+
+                            </span>
+                            </div>
+                            <a class="btocr_button btocr_button_disable">即将开始</a>
+                        #end
+                    #end
+                </div>
+                <div class="btocr_down">
+                    <span class="btocr_icon_text">申领条件</span>
+                    #if($card.type.typeStr=='free')
+                        <p>1.会员可免费申请，若申请成功无需支付邮费  </p>
+                        <p>2.申请时可能会因卖家设置了门槛而申请失败 </p>
+                        <p>3.申请成功需要提交真实原创的试用报告</p>
+                    #else
+                        <p>1.符合门槛的用户可支付邮费免费领取</p>
+                        <p>2.申请时可能会因卖家设置了门槛而申请失败</p>
+                        <p>3.每个会员只能领取一次，请在拍下后20分钟内完成支付</p>
+                    #end
+                </div>
+                #if($card.status.statusStr == 'ed')
+                    <em class="btocr_finish_stamp"></em>
+                #end
+            </div>
+            <div class="btoc_shadow br_clearInline"></div>
+        </div>
+    #end
+    <div class="ui-page">
+        <div class="ui-page-wrap">
+            <b class="ui-page-num">
+                #if ($page == 1)
+                    <b class="ui-page-prev">&lt;&lt;上一页</b>
+                #else
+                    <a class="ui-page-prev" href="?pageNo=$!prePage">&lt;&lt;上一页</a>
+                #end
+                #if ($mStart <= $leftEnd)
+                    #set($leftStart = 0)
+                    #set($leftEnd = 0)
+                    #set($mStart = 1)
+                #end
+                #if ($mEnd >= $rStart)
+                    #set($rStart = 0)
+                    #set($rEnd = 0)
+                    #set($mEnd = $tPage)
+                #end
+                #if ($leftEnd > $leftStart)
+                    #foreach($p in [${leftStart}..${leftEnd}])
+                        <a href="?pageNo=$!p">$!p</a>
+                    #end
+                    #set($pInterval = $mStart - $leftEnd - 1)
+                    #if ( $pInterval == 1)
+                        #set( $p = $leftEnd + $pInterval)
+                        <a href="?pageNo=$!p">$!p</a>
+                    #end
+                    #if ( $pInterval >= 2)
+                        <b class="ui-page-break">...</b>
+                    #end
+                #end
+                #if( $mStart > $mEnd )
+                    #set($mStart = $mEnd)
+                #end
+                #foreach($p in [${mStart}..${mEnd}])
+                    #if($p == $page)
+                        <b class="ui-page-cur">$!p</b>
+                    #else
+                        <a href="?pageNo=$!p">$!p</a>
+                    #end
+                #end
+                #if ($rEnd > $rStart)
+                    <b class="ui-page-break">...</b>
+                #end
+                #if ( $page < $tPage || ( $tPage2 > $tPage && $page == $tPage ) )
+                    <a class="ui-page-next" href="?pageNo=$!nextPage"  >下一页&gt;&gt;</a>
+                #else
+                    <b class="ui-page-next">下一页&gt;&gt;</b>
+                #end
+            </b>
+            <b class="ui-page-skip">
+                <form action="">
+                    共$!{tPage}页，到第<input type="text" name="pageNo" class="ui-page-skipTo" size="3" value="$!page">页
+                    <button type="submit" class="ui-btn-s">确定</button>
+                </form>
+            </b>
+        </div>
+    </div>
+</div>
+#else
+<div class="errorTips">
+    喵~ 找不到试用相关商品！<a href="/">返回首页</a>
+</div>
+#end
