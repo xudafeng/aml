@@ -10,7 +10,18 @@
      var aml = {
          version : VERSION
         ,extend : extend
+        ,error : error
      };
+    /**
+     * 全局数据对象
+     * @type {{}}
+     */
+     var data = aml.data = {};
+    /**
+     * 实现松散耦合的观察者模式
+     * @returns {*}
+     */
+
     /**
      * 对象混合拷贝
      * @returns {*}
@@ -35,3 +46,10 @@
         }
         return o;
      };
+    /**
+     * 容错提示
+     * @param s
+     */
+    function error(s){
+        throw new Error(s);
+    }

@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-09-01 10:44:04
+ * Latest build : 2013-09-01 21:26:25
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -49,7 +49,18 @@
      var aml = {
          version : VERSION
         ,extend : extend
+        ,error : error
      };
+    /**
+     * 全局数据对象
+     * @type {{}}
+     */
+     var data = aml.data = {};
+    /**
+     * 实现松散耦合的观察者模式
+     * @returns {*}
+     */
+
     /**
      * 对象混合拷贝
      * @returns {*}
@@ -74,6 +85,13 @@
         }
         return o;
      };
+    /**
+     * 容错提示
+     * @param s
+     */
+    function error(s){
+        throw new Error(s);
+    }
     /**
      * file   : type.js
      * module : type 类型检测模块
@@ -113,6 +131,10 @@
      * author : xudafeng@126.com
      * build  : 2013.7.4
      */
+
+    function Loader(){
+
+    };
     /**
     * module : depend 依赖模块
     * author : xudafeng@126.com
@@ -126,11 +148,11 @@
     function Module (){
 
     };
-    Module.define = function(id,depends,handle){
+    Module.define = function(name, deps, factory){
+        console.log(arguments)
 
     };
 
-    Module.define.amd = {};
     window.define = Module.define;
     /**
      * module   : config 配置模块
@@ -140,10 +162,10 @@
      * 声明静态变量
      */
 
-/**
- * module : 出口模块
- * author : xudafeng@126.com
- * build  : 2013.7.4
- */
+    /**
+     * module : 出口模块
+     * author : xudafeng@126.com
+     * build  : 2013.7.4
+     */
     window.aml = aml;
 }(this));

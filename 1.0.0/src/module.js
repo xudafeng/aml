@@ -6,9 +6,9 @@
     function Module (){
 
     };
-    Module.define = function(id,depends,handle){
+    Module.define = function(name, deps, factory){
+        console.log(arguments)
 
     };
 
-    Module.define.amd = {};
     window.define = Module.define;
