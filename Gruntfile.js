@@ -69,6 +69,9 @@ module.exports = function(grunt) {
             name : 'loader',
             concat : true
         },{
+            name : 'module',
+            concat : true
+        },{
             name : 'config',
             concat : true
         },{
