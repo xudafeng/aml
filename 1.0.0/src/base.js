@@ -9,8 +9,6 @@
      */
      var aml = {
          version : VERSION
-        ,extend : extend
-        ,error : error
      };
     /**
      * 全局数据对象
