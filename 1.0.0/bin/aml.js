@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-09-02 9:50:35
+ * Latest build : 2013-09-02 13:24:13
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -144,14 +144,19 @@
      * build  : 2013.7.4
      */
     function Module (){
-
+        this.name = 1;
     };
     Module.define = function(name, deps, factory){
-        console.log(arguments)
+        console.log(name)
 
     };
+    Module.require = function(name){
+        return 12;
+    };
 
+    Module.define.amd = {};
     window.define = Module.define;
+    window.require = Module.require;
     /**
      * module   : config 配置模块
      * author   : xudafeng@126.com
