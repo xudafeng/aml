@@ -53,7 +53,13 @@ module.exports = function(grunt) {
             name : 'base',
             concat : true
         },{
+            name : 'util/error',
+            concat : true
+        },{
             name : 'util/type',
+            concat : true
+        },{
+            name : 'util/broadcast',
             concat : true
         },{
             name : 'util/path',

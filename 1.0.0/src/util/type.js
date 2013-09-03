@@ -15,8 +15,19 @@
     var isString = _typeof('String');
     var isObject = _typeof('Object');
     var isFunction = _typeof('Function');
-    var isFunction = _typeof('Undefined');
-
+    var isUndefined = _typeof('Undefined');
+    /**
+     * 判空检测
+     */
+    function _empty(type){
+        return function(obj){
+            if(type =='array' || type == 'string'){
+                return obj.length === 0;
+            };
+        };
+    };
+    var isEmptyArray = _empty('array');
+    var isEmptyString = _empty('string');
     /**
      * 通用类型检测
      */

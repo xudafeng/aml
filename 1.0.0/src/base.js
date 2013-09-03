@@ -15,10 +15,6 @@
      * @type {{}}
      */
      var data = aml.data = {};
-    /**
-     * 实现松散耦合的观察者模式
-     * @returns {*}
-     */
 
     /**
      * 对象混合拷贝
@@ -45,9 +41,16 @@
         return o;
      };
     /**
-     * 容错提示
-     * @param s
+     * 遍历
      */
-    function error(s){
-        throw new Error(s);
-    }
+    function each (object, fn) {
+
+        if(object){
+            for(var i in object){
+                if(i !== 'length' && i !== 'item'){
+                    fn.call(this,object[i],i);
+                }
+            }
+        }
+        return object;
+    };

@@ -1,3 +1,3 @@
 define('mod2',[],function(){
-    return 2;
+    return parseInt(2);
 });

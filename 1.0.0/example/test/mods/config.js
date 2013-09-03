@@ -1,4 +1,5 @@
-define('config',[],function(){
+define('config',['mod1'],function(){
+
     aml.config({
         path: "../",
         alias: {
