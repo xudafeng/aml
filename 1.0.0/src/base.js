@@ -51,3 +51,6 @@
     function error(s){
         throw new Error(s);
     }
+    /**
+    * 基于AOP的逻辑分离
+    */
