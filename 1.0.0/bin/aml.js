@@ -2,11 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
-<<<<<<< HEAD
- * Latest build : 2013-09-03 17:09:48
-=======
- * Latest build : 2013-09-03 9:31:42
->>>>>>> b8195dad0bd959761ff0e2fb25a55b5734178fbc
+ * Latest build : 2013-09-04 14:07:46
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -87,6 +83,7 @@
     /**
      * 遍历
      */
+
     function each (object, fn) {
 
         if(object){
@@ -98,6 +95,7 @@
         }
         return object;
     };
+
     /**
      * 容错提示
      * @param s
@@ -105,10 +103,6 @@
     function error(s){
         throw new Error(s);
     }
-    /**
-    * 基于AOP的逻辑分离
-    */
-
     /**
      * file   : type.js
      * module : type 类型检测模块
@@ -221,18 +215,7 @@
      * build  : 2013.7.4
      */
     function Module (){
-<<<<<<< HEAD
         this.status = 0;
-=======
-        this.name = 1;
-    };
-    Module.define = function(name, deps, factory){
-        console.log(name)
-
-    };
-    Module.require = function(name){
-        return '';
->>>>>>> b8195dad0bd959761ff0e2fb25a55b5734178fbc
     };
     extend(Module,{
         define:function(name, deps, factory){

@@ -43,7 +43,7 @@
     /**
      * 遍历
      */
-<<<<<<< HEAD
+
     function each (object, fn) {
 
         if(object){
@@ -55,11 +55,3 @@
         }
         return object;
     };
-=======
-    function error(s){
-        throw new Error(s);
-    }
-    /**
-    * 基于AOP的逻辑分离
-    */
->>>>>>> b8195dad0bd959761ff0e2fb25a55b5734178fbc
