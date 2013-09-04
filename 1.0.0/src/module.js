@@ -20,7 +20,7 @@
                 id: name,
                 uri: name,
                 deps: deps,
-                factory: factory
+                constructor: factory
             };
             Broadcast.fire('define',data);
         },
@@ -28,7 +28,7 @@
             return '';
         },
         exec:function(d){
-            data[d.id]['factory'].apply(this, d.depsMods);
+            data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods);
         },
         load:function(){
 
@@ -67,7 +67,10 @@
                 if(isUndefined(data[i])){
                     allowExec = false;
                 }else{
-                    _depsMods.push(data[i]['factory']);
+                    if(isUndefined(data[i]['instance'])){
+                        data[i]['instance'] = data[i]['constructor']();
+                    };
+                    _depsMods.push(data[i]['instance']);
                 };
             });
             if(allowExec){

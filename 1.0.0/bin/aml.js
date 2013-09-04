@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-09-04 14:07:46
+ * Latest build : 2013-09-04 20:19:34
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -231,7 +231,7 @@
                 id: name,
                 uri: name,
                 deps: deps,
-                factory: factory
+                constructor: factory
             };
             Broadcast.fire('define',data);
         },
@@ -239,7 +239,7 @@
             return '';
         },
         exec:function(d){
-            data[d.id]['factory'].apply(this, d.depsMods);
+            data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods);
         },
         load:function(){
 
@@ -278,7 +278,10 @@
                 if(isUndefined(data[i])){
                     allowExec = false;
                 }else{
-                    _depsMods.push(data[i]['factory']);
+                    if(isUndefined(data[i]['instance'])){
+                        data[i]['instance'] = data[i]['constructor']();
+                    };
+                    _depsMods.push(data[i]['instance']);
                 };
             });
             if(allowExec){
@@ -310,7 +313,7 @@
      * 覆盖默认配置
      */
     extend(aml,{config:function(cfg){
-
+        console.log(cfg)
     }});
     /**
      * module : 出口模块

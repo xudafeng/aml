@@ -1,4 +1,4 @@
-define('config',['mod1'],function(){
+define('config',[],function(){
 
     aml.config({
         path: "../",

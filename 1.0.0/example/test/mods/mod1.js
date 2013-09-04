@@ -1,3 +1,6 @@
 define('mod1',[],function(){
-    return parseInt(1);
+    var mod1 = function(){
+        alert('mod1');
+    }
+    return mod1;
 });
