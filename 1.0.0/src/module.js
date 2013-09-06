@@ -27,6 +27,9 @@
         require:function(name){
             return '';
         },
+        save:function(d){
+
+        },
         exec:function(d){
             data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods);
         },
@@ -66,6 +69,9 @@
             each(d.deps,function(i){
                 if(isUndefined(data[i])){
                     allowExec = false;
+                    Broadcast.fire('save',{
+                        id:i
+                    });
                 }else{
                     if(isUndefined(data[i]['instance'])){
                         data[i]['instance'] = data[i]['constructor']();
@@ -91,6 +97,17 @@
     Broadcast.on('exec',function(d){
         Module.exec(d);
     });
+    /**
+     * 订阅缓存事件
+     * @type {{}}
+     */
+    Broadcast.on('save',function(d){
+        Module.save(d);
+    });
     Module.define.amd = {};
+    /**
+     * 暴露给全局
+     * @type {Function}
+     */
     window.define = Module.define;
     window.require = Module.require;
