@@ -1,5 +1,6 @@
-define('mod3',['mod1','mod2'],function(mod1,mod2){
-    mod1();
-    mod2();
+define('mod3',[],function(){
+    var mod3 = function(){
+        alert('mod3')
+    }
     return 'mod3';
 });

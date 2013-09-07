@@ -1,3 +1,3 @@
-define('init',['mod3'],function(mod3){
-    alert('mod3')
+define('init',['mod1'],function(mod1){
+    mod1();
 });

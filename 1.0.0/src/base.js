@@ -17,6 +17,12 @@
      var data = aml.data = {};
 
     /**
+     * 全局配置对象
+     * @type {{}}
+     */
+    var config = {};
+
+    /**
      * 对象混合拷贝
      * @returns {*}
      */

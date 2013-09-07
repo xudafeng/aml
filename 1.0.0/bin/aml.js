@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-09-06 20:58:29
+ * Latest build : 2013-09-07 13:41:52
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -38,6 +38,8 @@
     var HEAD = document.head || document.getElementsByTagName('head')[0] || document.documentElement;
     var DOC = document;
     var LOC = location;
+    var JSSuffix = '.js';
+    var CSSSuffix = '.css';
     /**
      * file   : base.js
      * module : base 基础模块
@@ -55,6 +57,12 @@
      * @type {{}}
      */
      var data = aml.data = {};
+
+    /**
+     * 全局配置对象
+     * @type {{}}
+     */
+    var config = {};
 
     /**
      * 对象混合拷贝
@@ -136,8 +144,12 @@
     /**
      * 通用类型检测
      */
-    var isJS = /\.js$/i;
-    var isCSS = /\.css$/i;
+    var isJS = function(s){
+        return /\.js$/i.test(s);
+    };
+    var isCSS = function(s){
+        return /\.css$/i.test(s)
+    };
 
     /**
      * 实现松散耦合的观察者模式
@@ -177,10 +189,12 @@
      * author : xudafeng@126.com
      * build  : 2013.7.4
      */
+    function Path(){
 
-    /**
-     *
-     */
+    }
+    Path.prototype = {
+
+    };
     /**
      * module : loader 加载模块
      * author : xudafeng@126.com
@@ -192,14 +206,48 @@
      * @param uri
      * @returns {*}
      */
-    function parseUri (uri){
-        return uri;
+    function parseUri (){
+        var _uri = config.path ? config.path : LOC.href;
+        return _uri;
     };
 
-    var pwd = aml.pwd = parseUri(LOC.href);
-
-    function Loader(){
-
+    function Loader(id){
+        this.id = id;
+        this.pwd = parseUri();
+        this.init();
+    };
+    Loader.prototype = {
+        init:function(){
+            this.router();
+        },
+        router:function(){
+            var self = this;
+            if(!isCSS(self.id)){
+                self.getScript(this.pwd + self.id + JSSuffix);
+            }
+        },
+        getScript:function(url, success, charset){
+            console.log(url)
+            var node = DOC.createElement('script');
+            node.src = url;
+            node.async = true;
+            if (charset) {
+                node.charset = charset;
+            }
+            //标准浏览器
+            if (DOC.addEventListener) {
+                node.addEventListener('load',success, false);
+            }else{
+                node.onreadystatechange = function(){
+                    if ('loaded' == node.readyState || 'complete' == node.readyState){
+                        node.onreadystatechange = null;
+                        success();
+                    }
+                };
+            }
+            HEAD.insertBefore(node, HEAD.firstChild);
+            return node;
+        }
     };
     /**
     * module : depend 依赖模块
@@ -215,8 +263,10 @@
      * build  : 2013.7.4
      */
     function Module (){
-        this.status = 0;
     };
+    /**
+     * 扩展模块类
+     */
     extend(Module,{
         define:function(name, deps, factory){
             /**
@@ -227,25 +277,26 @@
              * 获取当前关键标记数据
              * @type {{id: *, uri: *, deps: *, factory: *}}
              */
-            var data = {
+            Broadcast.fire('define',{
                 id: name,
                 uri: name,
                 deps: deps,
                 constructor: factory
-            };
-            Broadcast.fire('define',data);
+            });
         },
         require:function(name){
             return '';
         },
-        save:function(d){
-
-        },
         exec:function(d){
             data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods);
         },
-        load:function(){
-
+        load:function(d){
+            /**
+             * 并发加载模块队列
+             */
+            each(d.mods,function(i){
+                new Loader(i);
+            });
         }
     });
     /**
@@ -266,6 +317,9 @@
      * 订阅检测事件
      */
     Broadcast.on('check',function(d){
+        /**
+         * 若无依赖，立即执行
+         */
         if(isEmptyArray(d.deps)){
             Broadcast.fire('exec', {
                 id : d.id,
@@ -273,16 +327,15 @@
             });
         }else{
             /**
-             * 检测执行条件
+             * 检测依赖执行条件
              */
             var allowExec = true,
-                _depsMods = [];
+                _depsMods = [],
+                _preLoadMods = [];
             each(d.deps,function(i){
                 if(isUndefined(data[i])){
                     allowExec = false;
-                    Broadcast.fire('save',{
-                        id:i
-                    });
+                    _preLoadMods.push(i);
                 }else{
                     if(isUndefined(data[i]['instance'])){
                         data[i]['instance'] = data[i]['constructor']();
@@ -297,9 +350,12 @@
                 });
             }else{
                 /**
-                 * 标记
+                 * 加载即需模块
                  */
-            }
+                Broadcast.fire('load',{
+                    mods:_preLoadMods
+                });
+            };
         };
     });
     /**
@@ -309,11 +365,11 @@
         Module.exec(d);
     });
     /**
-     * 订阅缓存事件
+     * 订阅加载事件
      * @type {{}}
      */
-    Broadcast.on('save',function(d){
-        Module.save(d);
+    Broadcast.on('load',function(d){
+        Module.load(d);
     });
     Module.define.amd = {};
     /**
@@ -329,9 +385,11 @@
      *
      * 覆盖默认配置
      */
-    extend(aml,{config:function(cfg){
-        console.log(cfg)
-    }});
+    extend(aml,{
+        config:function(cfg){
+            extend(config,cfg);
+        }
+    });
     /**
      * module : 出口模块
      * author : xudafeng@126.com

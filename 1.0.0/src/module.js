@@ -4,8 +4,10 @@
      * build  : 2013.7.4
      */
     function Module (){
-        this.status = 0;
     };
+    /**
+     * 扩展模块类
+     */
     extend(Module,{
         define:function(name, deps, factory){
             /**
@@ -16,25 +18,26 @@
              * 获取当前关键标记数据
              * @type {{id: *, uri: *, deps: *, factory: *}}
              */
-            var data = {
+            Broadcast.fire('define',{
                 id: name,
                 uri: name,
                 deps: deps,
                 constructor: factory
-            };
-            Broadcast.fire('define',data);
+            });
         },
         require:function(name){
             return '';
         },
-        save:function(d){
-
-        },
         exec:function(d){
             data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods);
         },
-        load:function(){
-
+        load:function(d){
+            /**
+             * 并发加载模块队列
+             */
+            each(d.mods,function(i){
+                new Loader(i);
+            });
         }
     });
     /**
@@ -55,6 +58,9 @@
      * 订阅检测事件
      */
     Broadcast.on('check',function(d){
+        /**
+         * 若无依赖，立即执行
+         */
         if(isEmptyArray(d.deps)){
             Broadcast.fire('exec', {
                 id : d.id,
@@ -62,16 +68,15 @@
             });
         }else{
             /**
-             * 检测执行条件
+             * 检测依赖执行条件
              */
             var allowExec = true,
-                _depsMods = [];
+                _depsMods = [],
+                _preLoadMods = [];
             each(d.deps,function(i){
                 if(isUndefined(data[i])){
                     allowExec = false;
-                    Broadcast.fire('save',{
-                        id:i
-                    });
+                    _preLoadMods.push(i);
                 }else{
                     if(isUndefined(data[i]['instance'])){
                         data[i]['instance'] = data[i]['constructor']();
@@ -86,9 +91,12 @@
                 });
             }else{
                 /**
-                 * 标记
+                 * 加载即需模块
                  */
-            }
+                Broadcast.fire('load',{
+                    mods:_preLoadMods
+                });
+            };
         };
     });
     /**
@@ -98,11 +106,11 @@
         Module.exec(d);
     });
     /**
-     * 订阅缓存事件
+     * 订阅加载事件
      * @type {{}}
      */
-    Broadcast.on('save',function(d){
-        Module.save(d);
+    Broadcast.on('load',function(d){
+        Module.load(d);
     });
     Module.define.amd = {};
     /**

@@ -31,5 +31,9 @@
     /**
      * 通用类型检测
      */
-    var isJS = /\.js$/i;
-    var isCSS = /\.css$/i;
+    var isJS = function(s){
+        return /\.js$/i.test(s);
+    };
+    var isCSS = function(s){
+        return /\.css$/i.test(s)
+    };

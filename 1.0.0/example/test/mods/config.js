@@ -1,9 +1,7 @@
 define('config',[],function(){
-
     aml.config({
-        path: "../",
+        path: "http://localhost/demo/u/dafeng/github/aml/1.0.0/example/test/mods/",
         alias: {
-            "jquery": "jquery/jquery/1.10.1/jquery.js"
         }
     });
 });

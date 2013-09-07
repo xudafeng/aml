@@ -7,3 +7,5 @@
     var HEAD = document.head || document.getElementsByTagName('head')[0] || document.documentElement;
     var DOC = document;
     var LOC = location;
+    var JSSuffix = '.js';
+    var CSSSuffix = '.css';
