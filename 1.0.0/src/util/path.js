@@ -6,6 +6,6 @@
     function Path(){
 
     }
-    Path.prototype = {
+    extend(Path,{
 
-    };
+    });

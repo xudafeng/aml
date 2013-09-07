@@ -1,6 +1,7 @@
-define('mod2',[],function(){
+define('mod2',['mod3'],function(){
+    console.log('add mod2')
     var mod2 = function(){
-        alert('mod2');
+        console.log('mod2');
     };
     return mod2;
 });

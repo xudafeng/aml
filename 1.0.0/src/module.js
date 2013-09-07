@@ -20,7 +20,6 @@
              */
             Broadcast.fire('define',{
                 id: name,
-                uri: name,
                 deps: deps,
                 constructor: factory
             });
@@ -29,7 +28,7 @@
             return '';
         },
         exec:function(d){
-            data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods);
+            data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods) || {};
         },
         load:function(d){
             /**
@@ -38,26 +37,44 @@
             each(d.mods,function(i){
                 new Loader(i);
             });
+        },
+        save:function(d){
+            /**
+             * 存储锁，不允许覆盖
+             */
+            if(!data[d.id] || data[d.id] == d.id){
+                data[d.id] = d;
+                /**
+                 * 执行条件检测
+                 */
+                each(data,function(i){
+                    Broadcast.fire('check', i);
+                });
+            };
         }
     });
     /**
      * 订阅defined事件
      */
     Broadcast.on('define',function(d){
+
         /**
          * map赋值
          * @type {*}
          */
-        data[d.id] = d;
-        /**
-         * 执行条件检测
-         */
-        Broadcast.fire('check', d);
+        Broadcast.fire('save',d);
+
     });
     /**
      * 订阅检测事件
      */
     Broadcast.on('check',function(d){
+        /**
+         * 检测是否执行过
+         */
+        if(d['instance'] || d == data[d]){
+            return;
+        };
         /**
          * 若无依赖，立即执行
          */
@@ -70,21 +87,23 @@
             /**
              * 检测依赖执行条件
              */
-            var allowExec = true,
+            var _allowExec = true,
                 _depsMods = [],
                 _preLoadMods = [];
             each(d.deps,function(i){
-                if(isUndefined(data[i])){
-                    allowExec = false;
+                if(!data[i]){
                     _preLoadMods.push(i);
+                    data[i] = i;
                 }else{
-                    if(isUndefined(data[i]['instance'])){
-                        data[i]['instance'] = data[i]['constructor']();
+                    if(!data[i]['instance']){
+                        _allowExec = false;
+                        Broadcast.fire('check', data[i]);
+                    }else{
+                        _depsMods.push(data[i]['instance']);
                     };
-                    _depsMods.push(data[i]['instance']);
                 };
             });
-            if(allowExec){
+            if(isEmptyArray(_preLoadMods) && _allowExec){
                 Broadcast.fire('exec', {
                     id : d.id,
                     depsMods : _depsMods
@@ -111,6 +130,13 @@
      */
     Broadcast.on('load',function(d){
         Module.load(d);
+    });
+    /**
+     * 订阅缓存事件
+     * @type {{}}
+     */
+    Broadcast.on('save',function(d){
+        Module.save(d);
     });
     Module.define.amd = {};
     /**

@@ -30,7 +30,6 @@
             }
         },
         getScript:function(url, success, charset){
-            console.log(url)
             var node = DOC.createElement('script');
             node.src = url;
             node.async = true;
