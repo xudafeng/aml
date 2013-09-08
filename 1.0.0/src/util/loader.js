@@ -65,7 +65,7 @@
                 node.charset = charset;
             }
             node.addEventListener('load', success, false);
-            head.appendChild(node);
+            HEAD.appendChild(node);
             return node;
         }
     };
