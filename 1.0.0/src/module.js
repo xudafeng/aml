@@ -29,6 +29,9 @@
         },
         exec:function(d){
             data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods) || {};
+            each(data,function(i){
+                Broadcast.fire('check', i);
+            });
         },
         load:function(d){
             /**
