@@ -30,7 +30,7 @@
         router:function(){
             var self = this;
             if(isCSS(self.id)){
-                self.getStyle(this.pwd + self.id + CSSSuffix);
+                self.getStyle(this.pwd + self.id);
             }else{
                 self.getScript(isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix));
             }
