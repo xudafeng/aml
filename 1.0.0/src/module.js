@@ -25,7 +25,8 @@
             });
         }
         ,require:function(name){
-            return '';
+            Broadcast.fire('load',name);
+            return null;
         }
         ,exec:function(d){
             data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods) || {};
@@ -38,9 +39,7 @@
             /**
              * 并发加载模块队列
              */
-            each(d.mods,function(i){
-                new Loader(i);
-            });
+             new Loader(d);
         }
         ,save:function(d){
             /**
@@ -86,8 +85,8 @@
                     /**
                      * 加载即需模块
                      */
-                    Broadcast.fire('load',{
-                        mods:_preLoadMods
+                    each(_preLoadMods,function(i){
+                        Broadcast.fire('load',i);
                     });
                     /**
                      * 推送检测模块

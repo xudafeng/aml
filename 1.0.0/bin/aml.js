@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-09-08 13:39:38
+ * Latest build : 2013-09-08 14:04:42
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -210,7 +210,11 @@
         var _uri = config.path ? config.path : LOC.href;
         return _uri;
     };
-
+    /**
+     * loader构造器
+     * @param id
+     * @constructor
+     */
     function Loader(id){
         this.id = id;
         this.pwd = parseUri();
@@ -283,19 +287,21 @@
             });
         }
         ,require:function(name){
-            return '';
+            Broadcast.fire('load',name);
+            return null;
         }
         ,exec:function(d){
             data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods) || {};
+            /**
+             * 执行行为触发数据变化，需要检测
+             */
             Broadcast.fire('check', data);
         }
         ,load:function(d){
             /**
              * 并发加载模块队列
              */
-            each(d.mods,function(i){
-                new Loader(i);
-            });
+             new Loader(d);
         }
         ,save:function(d){
             /**
@@ -341,8 +347,8 @@
                     /**
                      * 加载即需模块
                      */
-                    Broadcast.fire('load',{
-                        mods:_preLoadMods
+                    each(_preLoadMods,function(i){
+                        Broadcast.fire('load',i);
                     });
                     /**
                      * 推送检测模块
@@ -356,7 +362,6 @@
      * 订阅defined事件
      */
     Broadcast.on('define',function(d){
-
         /**
          * map赋值
          * @type {*}

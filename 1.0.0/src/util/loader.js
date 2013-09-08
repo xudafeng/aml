@@ -13,7 +13,11 @@
         var _uri = config.path ? config.path : LOC.href;
         return _uri;
     };
-
+    /**
+     * loader构造器
+     * @param id
+     * @constructor
+     */
     function Loader(id){
         this.id = id;
         this.pwd = parseUri();
