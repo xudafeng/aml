@@ -30,7 +30,7 @@
         router:function(){
             var self = this;
             if(!isCSS(self.id)){
-                self.getScript(this.pwd + self.id + JSSuffix);
+                self.getScript(isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix));
             }
         },
         getScript:function(url, success, charset){

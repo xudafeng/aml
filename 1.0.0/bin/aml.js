@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-09-08 14:04:42
+ * Latest build : 2013-09-08 15:38:24
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -227,7 +227,7 @@
         router:function(){
             var self = this;
             if(!isCSS(self.id)){
-                self.getScript(this.pwd + self.id + JSSuffix);
+                self.getScript(isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix));
             }
         },
         getScript:function(url, success, charset){
@@ -409,6 +409,11 @@
      *
      * 覆盖默认配置
      */
+    function getCurrentScript() {
+        var scripts = DOC.getElementsByTagName('script');
+        return scripts[scripts.length - 1]; //FF下可以使用DOC.currentScript
+    };
+    new Loader(getCurrentScript().getAttribute('data-init'));
     extend(aml,{
         config:function(cfg){
             extend(config,cfg);
