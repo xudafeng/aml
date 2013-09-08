@@ -29,7 +29,9 @@
         },
         router:function(){
             var self = this;
-            if(!isCSS(self.id)){
+            if(isCSS(self.id)){
+                self.getStyle(this.pwd + self.id + CSSSuffix);
+            }else{
                 self.getScript(isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix));
             }
         },
@@ -52,6 +54,18 @@
                 };
             }
             HEAD.insertBefore(node, HEAD.firstChild);
+            return node;
+        },
+        getStyle:function(url, success, charset){
+            var node = DOC.createElement('link');
+            node.rel = 'stylesheet';
+            node.href = url;
+            //设置编码
+            if (charset) {
+                node.charset = charset;
+            }
+            node.addEventListener('load', success, false);
+            head.appendChild(node);
             return node;
         }
     };
