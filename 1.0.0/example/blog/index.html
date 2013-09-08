@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>blog</title>
+    <link rel="stylesheet" href="css/demo.css"/>
+    <script type='text/javascript' src='http://www.xdf.me/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
+    <script src="js/leaf.js"></script>
+</head>
+<body>
+<button id="test">bbbbbbbbb</button>
+<script type="text/javascript">
+    (function($){
+        var picPlace = 'images/';
+        $.AutomLeafStart({
+            leafsfolder:picPlace
+            ,howmanyimgsare:8
+            ,initialleafs:10
+            ,maxYposition:-10
+            ,multiplyclick:true
+            ,multiplynumber:2
+            ,infinite:true
+            ,fallingsequence:4000
+        });
+        $(".site-title").on("mouseenter",function(){
+            $.AutomLeafAdd({
+                leafsfolder:picPlace
+                ,add:10
+            });
+        });
+    })(jQuery);
+</script>
+<!--<script src="http://rawgithub.com/xudafeng/aml/master/1.0.0/bin/aml.min.js" data-init="http://rawgithub.com/xudafeng/blog/master/assets/bin/init.js"></script>-->
+</body>
+</html>
