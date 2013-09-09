@@ -1,5 +1,8 @@
-AML - A simple asynchronous module loader with dependency management.
+AML
 ===
+
+> A simple asynchronous module loader with dependency management.
+> by xdf
 
                                   A                MMMMMMMM                MMMMMMMM   LLLLLLL
                                 A A               M        M             M         M L      L
@@ -18,6 +21,3 @@ AML - A simple asynchronous module loader with dependency management.
       A      A             A      A  M      M                  M      M L                     L
      AAAAAAA               AAAAAAA   MMMMMMM                   MMMMMMM  LLLLLLLLLLLLLLLLLLLLLL
 
-===
-
-by xdf
