@@ -1,8 +1,7 @@
 AML
 ===
 
-> * A simple asynchronous module loader with dependency management.
-> * by xdf
+> A simple asynchronous module loader with dependency management by xdf
 
                                   A                MMMMMMMM                MMMMMMMM   LLLLLLL
                                 A A               M        M             M         M L      L
