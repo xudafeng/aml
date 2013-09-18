@@ -5,11 +5,11 @@
      *
      * 覆盖默认配置
      */
-    function getCurrentScript() {
+    function getCurrentScriptInit() {
         var scripts = DOC.getElementsByTagName('script');
-        return scripts[scripts.length - 1]; //FF下可以使用DOC.currentScript
+        return scripts[scripts.length - 1].getAttribute('data-init'); //FF下可以使用DOC.currentScript
     };
-    new Loader(getCurrentScript().getAttribute('data-init'));
+    getCurrentScriptInit() && new Loader(getCurrentScript());
     extend(aml,{
         config:function(cfg){
             extend(config,cfg);

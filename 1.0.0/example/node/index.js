@@ -1,1 +1,4 @@
-console.log(123)
+function index(){
+    console.log('index');
+}
+exports.index = index;
