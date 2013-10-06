@@ -61,3 +61,11 @@
         }
         return object;
     };
+    /**
+     * 获取唯一id
+     */
+    var id = 0;
+    
+    function getId(){
+        return id ++;
+    }

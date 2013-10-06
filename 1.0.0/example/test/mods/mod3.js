@@ -3,8 +3,7 @@ define('mod3',[],function(){
     var mod3 = function(){
         console.log('mod3')
         setTimeout(function(){
-            var xuyao = require('mod4');
-            console.log(xuyao)
+            require('mod4');
         },5000)
     }
     return mod3;

@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-09-24 14:23:52
+ * Latest build : 2013-10-06 14:05:59
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -103,6 +103,14 @@
         }
         return object;
     };
+    /**
+     * 获取唯一id
+     */
+    var id = 0;
+    
+    function getId(){
+        return id ++;
+    }
 
     /**
      * 容错提示
@@ -126,6 +134,7 @@
         };
     };
     var isString = _typeof('String');
+    var isArray = _typeof('Array');
     var isObject = _typeof('Object');
     var isFunction = _typeof('Function');
     var isUndefined = _typeof('Undefined');
@@ -229,7 +238,7 @@
             if(isCSS(self.id)){
                 self.getStyle(this.pwd + self.id);
             }else{
-                self.getScript(isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix));
+                self.getScript((isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix)) + '?t=' + (config['tag'] ? config['tag'] : (new Date()).valueOf()));
             }
         },
         getScript:function(url, success, charset){
@@ -266,6 +275,7 @@
             return node;
         }
     };
+
     /**
     * module : depend 依赖模块
     * author : xudafeng@126.com
@@ -286,18 +296,37 @@
      */
     extend(Module,{
         define:function(name, deps, factory){
+
+            var _name = name,
+                _deps = deps,
+                _factory = factory;
+
+            switch(arguments.length){
+                case 1:
+                    _name = 'anony' + getId();
+                    _deps = [];
+                    _factory = name;
+                    break;
+                case 2:
+                    if(isString(_name)){
+                        _deps = [];
+                        _factory = deps;
+                    }else if(isArray(_name)){
+                        _name = 'anony' + getId();
+                        _deps = name;
+                        _factory = deps;
+                    }
+                    break;
+            }
             /**
              * 检测依赖，标记依赖
-             */
-            //deps = dependenceAnalysis(factory);
-            /**
              * 获取当前关键标记数据
              * @type {{id: *, uri: *, deps: *, factory: *}}
              */
             Broadcast.fire('define',{
-                id: name,
-                deps: deps,
-                constructor: factory
+                id: _name,
+                deps: _deps,
+                constructor: _factory
             });
         }
         ,require:function(name){
@@ -416,6 +445,7 @@
      */
     window.define = Module.define;
     window.require = Module.require;
+
     /**
      * module   : config 配置模块
      * author   : xudafeng@126.com
@@ -427,7 +457,7 @@
         var scripts = DOC.getElementsByTagName('script');
         return scripts[scripts.length - 1].getAttribute('data-init'); //FF下可以使用DOC.currentScript
     };
-    getCurrentScriptInit() && new Loader(getCurrentScriptInit());
+    getCurrentScriptInit() && new Loader(getCurrentScriptInit() + JSSuffix);
     extend(aml,{
         config:function(cfg){
             extend(config,cfg);

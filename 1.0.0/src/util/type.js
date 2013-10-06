@@ -13,6 +13,7 @@
         };
     };
     var isString = _typeof('String');
+    var isArray = _typeof('Array');
     var isObject = _typeof('Object');
     var isFunction = _typeof('Function');
     var isUndefined = _typeof('Undefined');

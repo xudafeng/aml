@@ -10,18 +10,37 @@
      */
     extend(Module,{
         define:function(name, deps, factory){
+
+            var _name = name,
+                _deps = deps,
+                _factory = factory;
+
+            switch(arguments.length){
+                case 1:
+                    _name = 'anony' + getId();
+                    _deps = [];
+                    _factory = name;
+                    break;
+                case 2:
+                    if(isString(_name)){
+                        _deps = [];
+                        _factory = deps;
+                    }else if(isArray(_name)){
+                        _name = 'anony' + getId();
+                        _deps = name;
+                        _factory = deps;
+                    }
+                    break;
+            }
             /**
              * 检测依赖，标记依赖
-             */
-            //deps = dependenceAnalysis(factory);
-            /**
              * 获取当前关键标记数据
              * @type {{id: *, uri: *, deps: *, factory: *}}
              */
             Broadcast.fire('define',{
-                id: name,
-                deps: deps,
-                constructor: factory
+                id: _name,
+                deps: _deps,
+                constructor: _factory
             });
         }
         ,require:function(name){

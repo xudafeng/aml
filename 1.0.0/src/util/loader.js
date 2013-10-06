@@ -32,7 +32,7 @@
             if(isCSS(self.id)){
                 self.getStyle(this.pwd + self.id);
             }else{
-                self.getScript(isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix));
+                self.getScript((isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix)) + '?t=' + (config['tag'] ? config['tag'] : (new Date()).valueOf()));
             }
         },
         getScript:function(url, success, charset){
