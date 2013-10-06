@@ -9,7 +9,7 @@
         var scripts = DOC.getElementsByTagName('script');
         return scripts[scripts.length - 1].getAttribute('data-init'); //FF下可以使用DOC.currentScript
     };
-    getCurrentScriptInit() && new Loader(getCurrentScriptInit() + JSSuffix);
+    getCurrentScriptInit() && new Loader(getCurrentScriptInit() + (isJS(getCurrentScriptInit()) ? EMPTY : JSSuffix));
     extend(aml,{
         config:function(cfg){
             extend(config,cfg);
