@@ -18,8 +18,9 @@
      * @param id
      * @constructor
      */
-    function Loader(id){
+    function Loader(id,callback){
         this.id = id;
+        this.callback = callback;
         this.pwd = parseUri();
         this.init();
     };
@@ -32,7 +33,7 @@
             if(isCSS(self.id)){
                 self.getStyle(this.pwd + self.id);
             }else{
-                self.getScript((isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix)) + '?t=' + (config['tag'] ? config['tag'] : (new Date()).valueOf()));
+                self.getScript((isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix)) + '?t=' + (config['tag'] ? config['tag'] : (new Date()).valueOf()),self.callback);
             }
         },
         getScript:function(url, success, charset){
@@ -49,7 +50,7 @@
                 node.onreadystatechange = function(){
                     if ('loaded' == node.readyState || 'complete' == node.readyState){
                         node.onreadystatechange = null;
-                        success();
+                        success && success();
                     }
                 };
             }

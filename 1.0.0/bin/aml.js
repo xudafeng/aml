@@ -2,7 +2,7 @@
  * aml.js v1.0.0
  *
  * A simple asynchronous module loader with dependency management.
- * Latest build : 2013-10-06 14:23:30
+ * Latest build : 2013-10-12 19:20:14
  *
  * http://xudafeng.github.com/aml/
  * ================================================================
@@ -193,6 +193,7 @@
             };
         }
     });
+
     /**
      * module : path 模块
      * author : xudafeng@126.com
@@ -224,8 +225,9 @@
      * @param id
      * @constructor
      */
-    function Loader(id){
+    function Loader(id,callback){
         this.id = id;
+        this.callback = callback;
         this.pwd = parseUri();
         this.init();
     };
@@ -238,7 +240,7 @@
             if(isCSS(self.id)){
                 self.getStyle(this.pwd + self.id);
             }else{
-                self.getScript((isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix)) + '?t=' + (config['tag'] ? config['tag'] : (new Date()).valueOf()));
+                self.getScript((isJS(self.id) ? self.id :(this.pwd + self.id + JSSuffix)) + '?t=' + (config['tag'] ? config['tag'] : (new Date()).valueOf()),self.callback);
             }
         },
         getScript:function(url, success, charset){
@@ -255,7 +257,7 @@
                 node.onreadystatechange = function(){
                     if ('loaded' == node.readyState || 'complete' == node.readyState){
                         node.onreadystatechange = null;
-                        success();
+                        success && success();
                     }
                 };
             }
@@ -277,13 +279,24 @@
     };
 
     /**
-    * module : depend 依赖模块
+    * module : depend 依赖模块，借鉴seajs
     * author : xudafeng@126.com
     * build  : 2013.7.4
     */
     function dependenceAnalysis(factory){
-        return factory.toString();
+        var code = factory.toString();
+        var REQUIRE_RE = /"(?:\\"|[^"])*"|'(?:\\'|[^'])*'|\/\*[\S\s]*?\*\/|\/(?:\\\/|[^\/\r\n])+\/(?=[^\/])|\/\/.*|\.\s*require|(?:^|[^$])\brequire\s*\(\s*(["'])(.+?)\1\s*\)/g;
+        var SLASH_RE = /\\\\/g;
+        var ret = [];
+        code.replace(SLASH_RE, "")
+            .replace(REQUIRE_RE, function(m, m1, m2) {
+                if (m2) {
+                  ret.push(m2);
+                }
+              })
+          return ret;
     };
+
     /**
      * module : 模块
      * author : xudafeng@126.com
@@ -291,19 +304,32 @@
      */
     function Module (){
     };
+    var currentMod;
+    var publishExport = {};
+    var preLoadQuery = [];
+    data['exports'] = {
+        constructor:function(){
+            return publishExport;
+        },
+        deps:[],
+        id:'exports'
+    };
     /**
      * 扩展模块类
      */
+
     extend(Module,{
         define:function(name, deps, factory){
-
             var _name = name,
                 _deps = deps,
                 _factory = factory;
 
+            /**
+             * 处理匿名模块
+             */
             switch(arguments.length){
                 case 1:
-                    _name = 'anony' + getId();
+                    _name = isEmptyArray(preLoadQuery) ? 'anony' + getId() : preLoadQuery.pop();
                     _deps = [];
                     _factory = name;
                     break;
@@ -312,39 +338,47 @@
                         _deps = [];
                         _factory = deps;
                     }else if(isArray(_name)){
-                        _name = 'anony' + getId();
+                        _name = isEmptyArray(preLoadQuery) ? 'anony' + getId() : preLoadQuery.pop();
                         _deps = name;
                         _factory = deps;
                     }
                     break;
+            }
+            var _preLoadMods = dependenceAnalysis(_factory);
+
+            for(var i = 0;i<_preLoadMods.length;i++){
+                preLoadQuery.push(_preLoadMods[i]);
+                _deps.push(_preLoadMods[i]);
             }
             /**
              * 检测依赖，标记依赖
              * 获取当前关键标记数据
              * @type {{id: *, uri: *, deps: *, factory: *}}
              */
+            //console.log(_deps)
             Broadcast.fire('define',{
                 id: _name,
                 deps: _deps,
                 constructor: _factory
             });
         }
+        /* 未做递归检测，默认执行，有空加上 */
         ,require:function(name){
-            Broadcast.fire('load',name);
-            return null;
+            return data[name]['exports'];
         }
         ,exec:function(d){
             data[d.id]['instance'] = data[d.id]['constructor'].apply(this, d.depsMods) || {};
+            data[d.id]['exports'] = publishExport;
             /**
              * 执行行为触发数据变化，需要检测
              */
             Broadcast.fire('check', data);
         }
-        ,load:function(d){
+        ,load:function(d,callback){
             /**
              * 并发加载模块队列
              */
-             new Loader(d);
+             new Loader(d,callback);
         }
         ,save:function(d){
             /**
@@ -400,6 +434,9 @@
                 };
             });
         }
+        ,preLoad:function(){
+        
+        }
     });
     /**
      * 订阅defined事件
@@ -437,6 +474,13 @@
      */
     Broadcast.on('save',function(d){
         Module.save(d);
+    });
+    /**
+     * 订阅缓存事件
+     * @type {{}}
+     */
+    Broadcast.on('require',function(d){
+        Module.load(d.id,d.callback);
     });
     Module.define.amd = {};
     /**
