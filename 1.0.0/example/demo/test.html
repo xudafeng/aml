@@ -1,91 +1,3 @@
-<!--#def {
-   "cards": [
-       {
-            "title":"ºÚÉ«Ï¸ÎÆÈ¹¸¶·ÑÊ¹ÓÃÀñ°ü",
-            "currentPrice":"399.00",
-            "type":"fuyou",
-            "totalNum":"1628",
-            "status":"1",
-            "startTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
-            "reportNum":"123",
-            "requestNum":"1000",
-            "endTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
-            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
-       },
-       {
-            "title":"ºÚÉ«Ï¸ÎÆÈ¹¸¶·ÑÊ¹ÓÃÀñ°ü",
-            "currentPrice":"399.00",
-            "type":"fuyou",
-            "totalNum":"1628",
-            "status":"2",
-            "startTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
-            "reportNum":"123",
-            "requestNum":"1000",
-            "endTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
-            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
-       },
-       {
-            "title":"ºÚÉ«Ï¸ÎÆÈ¹¸¶·ÑÊ¹ÓÃÀñ°ü",
-            "currentPrice":"399.00",
-            "type":"fuyou",
-            "totalNum":"1628",
-            "status":"3",
-            "startTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
-            "reportNum":"123",
-            "requestNum":"1000",
-            "endTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
-            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
-       },
-       {
-            "title":"ºÚÉ«Ï¸ÎÆÈ¹¸¶·ÑÊ¹ÓÃÀñ°ü",
-            "currentPrice":"399.00",
-            "type":"free",
-            "totalNum":"1628",
-            "status":"1",
-            "startTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
-            "reportNum":"123",
-            "requestNum":"1000",
-            "endTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
-            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
-       },
-       {
-            "title":"ºÚÉ«Ï¸ÎÆÈ¹¸¶·ÑÊ¹ÓÃÀñ°ü",
-            "currentPrice":"399.00",
-            "type":"free",
-            "totalNum":"1628",
-            "status":"2",
-            "startTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
-            "reportNum":"123",
-            "requestNum":"1000",
-            "endTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
-            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
-       },
-       {
-            "title":"ºÚÉ«Ï¸ÎÆÈ¹¸¶·ÑÊ¹ÓÃÀñ°ü",
-            "currentPrice":"399.00",
-            "type":"free",
-            "totalNum":"1628",
-            "status":"3",
-            "startTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "picUrl":"http://img.f2e.taobao.net/all.png_360x360.jpg",
-            "reportNum":"123",
-            "requestNum":"1000",
-            "endTimeLong":"12ÔÂ22ÈÕ 00:00",
-            "shopItemUrl":"http://detail.tmall.com/item.htm?id=16204910274",
-            "detailUrl":"http://try.taobao.com/item.htm?id=6248703"
-       }
-   ]
-}-->
 <link rel="stylesheet" href="try-list.css"/>
 <div class="br_try_on_s">
     <h4 class="btos_header"></h4>
@@ -99,51 +11,51 @@
             <div class="btocr_up">
                 <h4>${card.title}</h4>
                 {@if card.type == 'fuyou'}
-                <span class="btoc_normal_text">¼ÛÖµ£º <span class="btoc_rmb">&yen;</span><span class="btoc_number">${card.currentPrice}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ê£Óà£º <span class="btoc_number">${card.requestNum}<span style="color:#999">/${card.totalNum}</span></span>&nbsp;·İ</span>
+                <span class="btoc_normal_text">ä»·å€¼ï¼š <span class="btoc_rmb">&yen;</span><span class="btoc_number">${card.currentPrice}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;å‰©ä½™ï¼š <span class="btoc_number">${card.requestNum}<span style="color:#999">/${card.totalNum}</span></span>&nbsp;ä»½</span>
                 {@else}
-                <span class="btoc_normal_text">¼ÛÖµ£º <span class="btoc_rmb">&yen;</span><span class="btoc_number">${card.currentPrice}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ìá¹©£º <span class="btoc_number">${card.totalNum}</span>·İ</span>
+                <span class="btoc_normal_text">ä»·å€¼ï¼š <span class="btoc_rmb">&yen;</span><span class="btoc_number">${card.currentPrice}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;æä¾›ï¼š <span class="btoc_number">${card.totalNum}</span>ä»½</span>
                 {@/if}
             </div>
             <div class="btocr_middle">
                 {@if card.type == 'fuyou'}
                 {@if card.status == 1}
-                <div>Ö»ĞèÓÊ·Ñ£º<span class="btoc_rmb btocr_font_red">&yen;</span><span class="btoc_number btocr_font_bigest btocr_font_red">399.00</span></div>
-                <a class="btocr_button">¸¶ÓÊÊÔÓÃ</a>
+                <div>åªéœ€é‚®è´¹ï¼š<span class="btoc_rmb btocr_font_red">&yen;</span><span class="btoc_number btocr_font_bigest btocr_font_red">399.00</span></div>
+                <a class="btocr_button">ä»˜é‚®è¯•ç”¨</a>
                 {@else if card.status == 2}
                 <div>
                         <span class="btocr_finished">
-                            ÊÔÓÃÒÑ½áÊø
+                            è¯•ç”¨å·²ç»“æŸ
                         </span>
                 </div>
                 {@else}
                 <div>
                         <span class="btocr_date_text">
-                            12<span class="btocr_font_14">ÔÂ</span>22<span class="btocr_font_14">ÈÕ</span><span class="btocr_font_16"> 00:00</span>
+                            12<span class="btocr_font_14">æœˆ</span>22<span class="btocr_font_14">æ—¥</span><span class="btocr_font_16"> 00:00</span>
                         </span>
                 </div>
-                <a class="btocr_button btocr_button_disable">¼´½«¿ªÊ¼</a>
+                <a class="btocr_button btocr_button_disable">å³å°†å¼€å§‹</a>
                 {@/if}
                 {@else}
                 {@if card.status == 1}
-                <div>ÒÑÉêÇë£º<span class="btoc_number btocr_font_bigest btocr_font_red">10000</span>ÈË</div>
-                <a class="btocr_button">¸¶ÓÊÊÔÓÃ</a>
+                <div>å·²ç”³è¯·ï¼š<span class="btoc_number btocr_font_bigest btocr_font_red">10000</span>äºº</div>
+                <a class="btocr_button">ä»˜é‚®è¯•ç”¨</a>
                 {@else if card.status == 2}
-                <div><span class="btocr_font_gray">ÊÔÓÃÒÑ½áÊø</span></div>
-                <a class="btocr_link_to_report" href="#">²é¿´±¨¸æ(123)>></a>
+                <div><span class="btocr_font_gray">è¯•ç”¨å·²ç»“æŸ</span></div>
+                <a class="btocr_link_to_report" href="#">æŸ¥çœ‹æŠ¥å‘Š(123)>></a>
                 {@else}
                 <div>
                         <span class="btocr_date_text">
-                            12<span class="btocr_font_14">ÔÂ</span>22<span class="btocr_font_14">ÈÕ</span><span class="btocr_font_16"> 00:00</span>
+                            12<span class="btocr_font_14">æœˆ</span>22<span class="btocr_font_14">æ—¥</span><span class="btocr_font_16"> 00:00</span>
                         </span>
                 </div>
-                <a class="btocr_button btocr_button_disable">¼´½«¿ªÊ¼</a>
+                <a class="btocr_button btocr_button_disable">å³å°†å¼€å§‹</a>
                 {@/if}
                 {@/if}
             </div>
             <div class="btocr_down">
-                <span class="btocr_icon_text">ÉêÁìÌõ¼ş</span>
-                <p>1.ËùÓĞ»áÔ±¶¼¿ÉÒÔÃâ·ÑÉêÇë£¬ÉêÇë³É¹¦ÎŞĞèÖ§¸¶ÓÊ·Ñ</p>
-                <p>2.ÉêÇë³É¹¦ĞèÒªÌá½»ÕæÊÇÔ­´´µÄÊÔÓÃ±¨¸æ</p>
+                <span class="btocr_icon_text">ç”³é¢†æ¡ä»¶</span>
+                <p>1.æ‰€æœ‰ä¼šå‘˜éƒ½å¯ä»¥å…è´¹ç”³è¯·ï¼Œç”³è¯·æˆåŠŸæ— éœ€æ”¯ä»˜é‚®è´¹</p>
+                <p>2.ç”³è¯·æˆåŠŸéœ€è¦æäº¤çœŸæ˜¯åŸåˆ›çš„è¯•ç”¨æŠ¥å‘Š</p>
             </div>
             {@if card.status == 2}
             <em class="btocr_finish_stamp"></em>
